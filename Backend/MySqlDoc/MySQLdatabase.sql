@@ -38,4 +38,4 @@ Delete from developers where id = 1;
 Delete from platforms where id = 1;
 Delete from games where id = 1;
 Delete from gamelinks where id = 1;
-Delete from users where id = 1;
+Delete from users where id = 2;
