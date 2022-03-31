@@ -3,17 +3,45 @@ post http://localhost:3000/api/users/login
 Content-Type: application/json
 
 {
-    "email": "sandor@gmail.com",
+    "email": "bernadett1104@gmail.com",
     "password": "admin"
 }
 
-### User hozzáadása
+### User add
 post http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-    "name": "Nagy Sándor",
-    "email": "sandor@gmail.com",
+    "name": "Sándor Bernadett",
+    "email": "bernadett1104@gmail.com",
     "password": "admin",
     "permission": 1
+}
+
+### Users
+get http://localhost:3000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
+
+### One User
+get http://localhost:3000/api/users/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
+
+### User edit
+put http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+    "name": "Sándor Bernadett",
+    "email": "bernadett1104@gmail.com",
+    "password": "admin",
+    "permission": 1,
+    "id": 4
+}
+
+### Delete user
+delete http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+    "id": 4
 }
