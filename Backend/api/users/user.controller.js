@@ -4,6 +4,7 @@ const {
     getUserByUserId,
     updateUser,
     deleteUser,
+    createCategory,
     getUsers
 
 } = require("./user.service.js");
@@ -145,6 +146,33 @@ module.exports = {
             return res.status(200).json({
                 success: 1,
                 message: "Deleted successfully",
+                data: results
+            });
+        });
+    },
+    createCategory: (req, res) => {
+        const body = req.body;
+        console.log(body);
+        createCategory(body, (err, results) => {
+            console.log(results);
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: -1,
+                    message: "database connection error",
+                    data: {}
+                });
+            }
+            if (results.affectedRows == 0) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "Not created user",
+                    data: results
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Created category",
                 data: results
             });
         });

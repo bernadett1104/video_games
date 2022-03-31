@@ -68,4 +68,17 @@ module.exports = {
             return callBack(null, results);
         });
     },
+    createCategory: (data, callBack) => {
+        let queryString = `
+            Insert into categories (id, name) values (?, ?);
+        `
+        let params = Object.values(data);
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
 };
