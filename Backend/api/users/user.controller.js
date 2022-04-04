@@ -5,6 +5,10 @@ const {
     updateUser,
     deleteUser,
     createCategory,
+    getCategories,
+    getCategoriesById,
+    updateCategory,
+    deleteCategory,
     getUsers
 
 } = require("./user.service.js");
@@ -173,6 +177,102 @@ module.exports = {
             return res.status(200).json({
                 success: 1,
                 message: "Created category",
+                data: results
+            });
+        });
+    },
+    getCategories: (req, res) => {
+        getCategories((err, results) => {
+            if (err) {
+                return res.status(500).json({
+                    success: -1,
+                    message: "Server error",
+                    data: []
+                });
+            }
+            if (results.length == 0) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "No records",
+                    data: results
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Get successfully",
+                data: results
+            });
+        });
+    },
+    getCategoriesById: (req, res) => {
+        const id = req.params.id;
+        getCategoriesById(id, (err, results) => {
+            if (err) {
+                return res.status(500).json({
+                    success: -1,
+                    message: "Server error",
+                    data: {}
+                });
+            }
+            if (!results) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "Record not found!",
+                    data: {}
+                })
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Record found!",
+                data: results
+            });
+        });
+    },
+    updateCategory: (req, res) => {
+        const body = req.body;
+        updateCategory(body, (err, results) => {
+            if (err) {
+                return res.status(500).json({
+                    success: -1,
+                    message: "Server error",
+                    data: {}
+                });
+            }
+            if (results.affectedRows == 0) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "Not updated",
+                    data: results
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Updated successfully",
+                data: results
+            });
+        });
+    },
+    deleteCategory: (req, res) => {
+        const data = req.body;
+        deleteCategory(data, (err, results) => {
+            if (err) {
+                res.status(500).json({
+                    deletedRows: 0,
+                    success: -1,
+                    message: "Server error"
+                })
+                return;
+            }
+            if (results.affectedRows == 0) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "Record Not Found",
+                    data: results
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Deleted successfully",
                 data: results
             });
         });

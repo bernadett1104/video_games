@@ -5,6 +5,10 @@ const {
     updateUsers,
     deleteUser,
     createCategory,
+    getCategories,
+    getCategoriesById,
+    updateCategory,
+    deleteCategory,
     login
 
 } = require("./user.controller.js");
@@ -20,11 +24,9 @@ router.put("/users/", checkToken, updateUsers);
 router.delete("/users/", checkToken, deleteUser);
 
 router.post("/categories", checkToken, createCategory);
-// router.get("/cars", checkToken, getCars);
-// router.get("/carsabc", checkToken, getCarsABC);
-// router.get("/cars/:id", checkToken, getCarById);
-// router.get("/carshrst/:hourlyRate", checkToken, getCarByHourlyRate);
-// router.put("/cars/", checkToken, updateCar);
-// router.delete("/cars/", checkToken, deleteCar);
+router.get("/categories", checkToken, getCategories);
+router.get("/categories/:id", checkToken, getCategoriesById);
+router.put("/categories/", checkToken, updateCategory);
+router.delete("/categories/", checkToken, deleteCategory);
 
 module.exports = router;
