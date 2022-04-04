@@ -129,4 +129,65 @@ module.exports = {
             return callBack(null, results);
         });
     },
+    createDeveloper: (data, callBack) => {
+        let queryString = `
+            Insert into developers (id, developer) values (?, ?);
+        `
+        let params = Object.values(data);
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    getDevelopers: callBack => {
+        const queryString = `Select * from developers`;
+        const params = [];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    getDevelopersById: (id, callBack) => {
+        const queryString = `Select * from developers Where id= ?`;
+        const params = [id];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    updateDeveloper: (data, callBack) => {
+        const queryString = `Update developers set developer=? Where id= ?`;
+        const params = [
+            data.developer,
+            data.id
+        ]
+        console.log("Update car:",params);
+        pool.query(queryString, params, (error, results, fields) => {
+            console.log(params, queryString, results);
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    deleteDeveloper: (data, callBack) => {
+        const queryString = `Delete from developers Where id = ?`;
+        const params = [data.id];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+            }
+            return callBack(null, results);
+        });
+    },
 };
