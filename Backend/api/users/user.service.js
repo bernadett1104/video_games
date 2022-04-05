@@ -315,4 +315,66 @@ module.exports = {
             return callBack(null, results);
         });
     },
+    createGamelink: (data, callBack) => {
+        let queryString = `
+            Insert into gamelinks (id, gameId, link) values (?, ?, ?);
+        `
+        let params = Object.values(data);
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    getGamelinks: callBack => {
+        const queryString = `Select * from gamelinks`;
+        const params = [];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    getGamelinksById: (id, callBack) => {
+        const queryString = `Select * from gamelinks Where id= ?`;
+        const params = [id];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    updateGamelink: (data, callBack) => {
+        const queryString = `Update gamelinks set gameId=?, link=? Where id= ?`;
+        const params = [
+            data.gameId,
+            data.link,
+            data.id
+        ]
+        console.log("Update platform:",params);
+        pool.query(queryString, params, (error, results, fields) => {
+            console.log(params, queryString, results);
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    deleteGamelink: (data, callBack) => {
+        const queryString = `Delete from gamelinks Where id = ?`;
+        const params = [data.id];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+            }
+            return callBack(null, results);
+        });
+    }
 };

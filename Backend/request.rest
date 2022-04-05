@@ -211,3 +211,45 @@ Content-Type: application/json
 {
     "id": 1
 }
+
+
+
+
+
+# GameLinks
+
+### GameLink add
+post http://localhost:3000/api/gamelinks
+Content-Type: application/json
+
+{
+    "id": 1,
+    "gameId": 1,
+    "link": "https://www.youtube.com/watch?v=mDYqT0_9VR4"
+}
+
+### Gamelinks
+get http://localhost:3000/api/gamelinks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
+
+### One gamelink
+get http://localhost:3000/api/gamelinks/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
+
+### Gamelink edit
+put http://localhost:3000/api/gamelinks
+Content-Type: application/json
+
+{
+    "gameId": 1,
+    "link": "https://www.youtube.com/watch?v=mDYqT0_9VR4 _updated",
+    "id": 1
+}
+
+### Delete gamelink
+delete http://localhost:3000/api/gamelinks
+Content-Type: application/json
+
+{
+    "id": 1
+}
