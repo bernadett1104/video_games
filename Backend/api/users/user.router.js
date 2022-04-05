@@ -19,6 +19,11 @@ const {
     getPlatformsById,
     updatePlatform,
     deletePlatform,
+    createGame,
+    getGames,
+    getGamesById,
+    updateGame,
+    deleteGame,
     login
 
 } = require("./user.controller.js");
@@ -50,5 +55,11 @@ router.get("/platforms", checkToken, getPlatforms);
 router.get("/platforms/:id", checkToken, getPlatformsById);
 router.put("/platforms/", checkToken, updatePlatform);
 router.delete("/platforms/", checkToken, deletePlatform);
+
+router.post("/games", checkToken, createGame);
+router.get("/games", checkToken, getGames);
+router.get("/games/:id", checkToken, getGamesById);
+router.put("/games/", checkToken, updateGame);
+router.delete("/games/", checkToken, deleteGame);
 
 module.exports = router;

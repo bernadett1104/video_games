@@ -165,3 +165,49 @@ Content-Type: application/json
 {
     "id": 1
 }
+
+
+
+
+
+# Games
+
+### Game add
+post http://localhost:3000/api/games
+Content-Type: application/json
+
+{
+    "id": 1,
+    "developerId": 1,
+    "gameName": "League of Legends",
+    "categoryId": 1,
+    "platformId": 1
+}
+
+### Games
+get http://localhost:3000/api/games
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
+
+### One game
+get http://localhost:3000/api/games/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
+
+### Game edit
+put http://localhost:3000/api/games
+Content-Type: application/json
+
+{
+    "developerId": 1,
+    "gameName": "League of Legends_updated",
+    "categoryId": 1,
+    "platformId": 1,
+    "id": 1
+}
+
+### Delete game
+delete http://localhost:3000/api/games
+Content-Type: application/json
+
+{
+    "id": 1
+}

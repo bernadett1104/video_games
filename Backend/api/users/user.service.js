@@ -251,4 +251,68 @@ module.exports = {
             return callBack(null, results);
         });
     },
+    createGame: (data, callBack) => {
+        let queryString = `
+            Insert into games (id, developerId, gameName, categoryId, platformId) values (?, ?, ?, ?, ?);
+        `
+        let params = Object.values(data);
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    getGames: callBack => {
+        const queryString = `Select * from games`;
+        const params = [];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    getGamesById: (id, callBack) => {
+        const queryString = `Select * from games Where id= ?`;
+        const params = [id];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    updateGame: (data, callBack) => {
+        const queryString = `Update games set developerId=?, gameName=?, categoryId=?, platformId=? Where id= ?`;
+        const params = [
+            data.developerId,
+            data.gameName,
+            data.categoryId,
+            data.platformId,
+            data.id
+        ]
+        console.log("Update platform:",params);
+        pool.query(queryString, params, (error, results, fields) => {
+            console.log(params, queryString, results);
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    deleteGame: (data, callBack) => {
+        const queryString = `Delete from games Where id = ?`;
+        const params = [data.id];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+            }
+            return callBack(null, results);
+        });
+    },
 };
