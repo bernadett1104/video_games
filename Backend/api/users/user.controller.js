@@ -24,6 +24,11 @@ const {
     getGamesById,
     updateGame,
     deleteGame,
+    createGamelink,
+    getGamelinks,
+    getGamelinksById,
+    updateGamelink,
+    deleteGamelink,
     getUsers
 
 } = require("./user.service.js");
@@ -185,7 +190,7 @@ module.exports = {
             if (results.affectedRows == 0) {
                 return res.status(200).json({
                     success: 0,
-                    message: "Not created user",
+                    message: "Not created category",
                     data: results
                 });
             }
@@ -308,7 +313,7 @@ module.exports = {
             if (results.affectedRows == 0) {
                 return res.status(200).json({
                     success: 0,
-                    message: "Not created user",
+                    message: "Not created developer",
                     data: results
                 });
             }
@@ -554,7 +559,7 @@ module.exports = {
             if (results.affectedRows == 0) {
                 return res.status(200).json({
                     success: 0,
-                    message: "Not created user",
+                    message: "Not created game",
                     data: results
                 });
             }
@@ -639,6 +644,129 @@ module.exports = {
     deleteGame: (req, res) => {
         const data = req.body;
         deleteGame(data, (err, results) => {
+            if (err) {
+                res.status(500).json({
+                    deletedRows: 0,
+                    success: -1,
+                    message: "Server error"
+                })
+                return;
+            }
+            if (results.affectedRows == 0) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "Record Not Found",
+                    data: results
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Deleted successfully",
+                data: results
+            });
+        });
+    },
+    createGamelink: (req, res) => {
+        const body = req.body;
+        console.log(body);
+        createGamelink(body, (err, results) => {
+            console.log(results);
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: -1,
+                    message: "database connection error",
+                    data: {}
+                });
+            }
+            if (results.affectedRows == 0) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "Not created gamelink",
+                    data: results
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Created gamelink",
+                data: results
+            });
+        });
+    },
+    getGamelinks: (req, res) => {
+        getGamelinks((err, results) => {
+            if (err) {
+                return res.status(500).json({
+                    success: -1,
+                    message: "Server error",
+                    data: []
+                });
+            }
+            if (results.length == 0) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "No records",
+                    data: results
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Get successfully",
+                data: results
+            });
+        });
+    },
+    getGamelinksById: (req, res) => {
+        const id = req.params.id;
+        getGamelinksById(id, (err, results) => {
+            if (err) {
+                return res.status(500).json({
+                    success: -1,
+                    message: "Server error",
+                    data: {}
+                });
+            }
+            if (!results) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "Record not found!",
+                    data: {}
+                })
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Record found!",
+                data: results
+            });
+        });
+    },
+    updateGamelink: (req, res) => {
+        const body = req.body;
+        updateGamelink(body, (err, results) => {
+            if (err) {
+                return res.status(500).json({
+                    success: -1,
+                    message: "Server error",
+                    data: {}
+                });
+            }
+            if (results.affectedRows == 0) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "Not updated",
+                    data: results
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Updated successfully",
+                data: results
+            });
+        });
+    },
+    deleteGamelink: (req, res) => {
+        const data = req.body;
+        deleteGamelink(data, (err, results) => {
             if (err) {
                 res.status(500).json({
                     deletedRows: 0,
