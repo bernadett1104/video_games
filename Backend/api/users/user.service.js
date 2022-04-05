@@ -109,7 +109,7 @@ module.exports = {
             data.name,
             data.id
         ]
-        console.log("Update car:",params);
+        console.log("Update category:",params);
         pool.query(queryString, params, (error, results, fields) => {
             console.log(params, queryString, results);
             if (error) {
@@ -170,7 +170,7 @@ module.exports = {
             data.developer,
             data.id
         ]
-        console.log("Update car:",params);
+        console.log("Update developer:",params);
         pool.query(queryString, params, (error, results, fields) => {
             console.log(params, queryString, results);
             if (error) {
@@ -182,6 +182,67 @@ module.exports = {
     },
     deleteDeveloper: (data, callBack) => {
         const queryString = `Delete from developers Where id = ?`;
+        const params = [data.id];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+            }
+            return callBack(null, results);
+        });
+    },
+    createPlatform: (data, callBack) => {
+        let queryString = `
+            Insert into platforms (id, name) values (?, ?);
+        `
+        let params = Object.values(data);
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    getPlatforms: callBack => {
+        const queryString = `Select * from platforms`;
+        const params = [];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    getPlatformsById: (id, callBack) => {
+        const queryString = `Select * from platforms Where id= ?`;
+        const params = [id];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    updatePlatform: (data, callBack) => {
+        const queryString = `Update platforms set name=? Where id= ?`;
+        const params = [
+            data.name,
+            data.id
+        ]
+        console.log("Update platform:",params);
+        pool.query(queryString, params, (error, results, fields) => {
+            console.log(params, queryString, results);
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    deletePlatform: (data, callBack) => {
+        const queryString = `Delete from platforms Where id = ?`;
         const params = [data.id];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {

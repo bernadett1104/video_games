@@ -14,6 +14,11 @@ const {
     getDevelopersById,
     updateDeveloper,
     deleteDeveloper,
+    createPlatform,
+    getPlatforms,
+    getPlatformsById,
+    updatePlatform,
+    deletePlatform,
     login
 
 } = require("./user.controller.js");
@@ -39,5 +44,11 @@ router.get("/developers", checkToken, getDevelopers);
 router.get("/developers/:id", checkToken, getDevelopersById);
 router.put("/developers/", checkToken, updateDeveloper);
 router.delete("/developers/", checkToken, deleteDeveloper);
+
+router.post("/platforms", checkToken, createPlatform);
+router.get("/platforms", checkToken, getPlatforms);
+router.get("/platforms/:id", checkToken, getPlatformsById);
+router.put("/platforms/", checkToken, updatePlatform);
+router.delete("/platforms/", checkToken, deletePlatform);
 
 module.exports = router;
