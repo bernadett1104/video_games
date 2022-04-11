@@ -57,8 +57,7 @@ post http://localhost:3000/api/categories
 Content-Type: application/json
 
 {
-    "id": 1,
-    "name": "multiplayer"
+    "name": "singleplayer"
 }
 
 ### Categories

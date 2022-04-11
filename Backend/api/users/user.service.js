@@ -70,9 +70,9 @@ module.exports = {
     },
     createCategory: (data, callBack) => {
         let queryString = `
-            Insert into categories (id, name) values (?, ?);
+            Insert into categories (name) values (?);
         `
-        let params = Object.values(data);
+        let params = [data.name];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
                 return callBack(error);
@@ -109,7 +109,7 @@ module.exports = {
             data.name,
             data.id
         ]
-        console.log("Update category:",params);
+        console.log("Update category:", params);
         pool.query(queryString, params, (error, results, fields) => {
             console.log(params, queryString, results);
             if (error) {
@@ -170,7 +170,7 @@ module.exports = {
             data.developer,
             data.id
         ]
-        console.log("Update developer:",params);
+        console.log("Update developer:", params);
         pool.query(queryString, params, (error, results, fields) => {
             console.log(params, queryString, results);
             if (error) {
@@ -231,7 +231,7 @@ module.exports = {
             data.name,
             data.id
         ]
-        console.log("Update platform:",params);
+        console.log("Update platform:", params);
         pool.query(queryString, params, (error, results, fields) => {
             console.log(params, queryString, results);
             if (error) {
@@ -295,7 +295,7 @@ module.exports = {
             data.platformId,
             data.id
         ]
-        console.log("Update platform:",params);
+        console.log("Update platform:", params);
         pool.query(queryString, params, (error, results, fields) => {
             console.log(params, queryString, results);
             if (error) {
@@ -357,7 +357,7 @@ module.exports = {
             data.link,
             data.id
         ]
-        console.log("Update platform:",params);
+        console.log("Update platform:", params);
         pool.query(queryString, params, (error, results, fields) => {
             console.log(params, queryString, results);
             if (error) {
