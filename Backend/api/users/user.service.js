@@ -131,9 +131,9 @@ module.exports = {
     },
     createDeveloper: (data, callBack) => {
         let queryString = `
-            Insert into developers (id, developer) values (?, ?);
+            Insert into developers (developer) values (?);
         `
-        let params = Object.values(data);
+        let params = [data.developer];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
                 return callBack(error);
@@ -192,9 +192,9 @@ module.exports = {
     },
     createPlatform: (data, callBack) => {
         let queryString = `
-            Insert into platforms (id, name) values (?, ?);
+            Insert into platforms (name) values (?);
         `
-        let params = Object.values(data);
+        let params = [data.name];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
                 return callBack(error);
@@ -253,9 +253,9 @@ module.exports = {
     },
     createGame: (data, callBack) => {
         let queryString = `
-            Insert into games (id, developerId, gameName, categoryId, platformId) values (?, ?, ?, ?, ?);
+            Insert into games (developerId, gameName, categoryId, platformId) values (?, ?, ?, ?);
         `
-        let params = Object.values(data);
+        let params = [data.developerId, data.gameName, data.categoryId, data.platformId];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
                 return callBack(error);
@@ -317,9 +317,9 @@ module.exports = {
     },
     createGamelink: (data, callBack) => {
         let queryString = `
-            Insert into gamelinks (id, gameId, link) values (?, ?, ?);
+            Insert into gamelinks (gameId, link) values (?, ?);
         `
-        let params = Object.values(data);
+        let params = [data.gameId, data.link];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
                 return callBack(error);
