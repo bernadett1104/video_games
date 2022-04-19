@@ -96,7 +96,6 @@ post http://localhost:3000/api/developers
 Content-Type: application/json
 
 {
-    "id": 1,
     "developer": "Riot Games"
 }
 
@@ -122,7 +121,7 @@ delete http://localhost:3000/api/developers
 Content-Type: application/json
 
 {
-    "id": 1
+    "id": 9
 }
 
 
@@ -136,7 +135,6 @@ post http://localhost:3000/api/platforms
 Content-Type: application/json
 
 {
-    "id": 1,
     "name": "PC"
 }
 
@@ -162,7 +160,7 @@ delete http://localhost:3000/api/platforms
 Content-Type: application/json
 
 {
-    "id": 1
+    "id": 5
 }
 
 
@@ -176,7 +174,6 @@ post http://localhost:3000/api/games
 Content-Type: application/json
 
 {
-    "id": 1,
     "developerId": 1,
     "gameName": "League of Legends",
     "categoryId": 1,
@@ -208,7 +205,7 @@ delete http://localhost:3000/api/games
 Content-Type: application/json
 
 {
-    "id": 1
+    "id": 36
 }
 
 
@@ -222,7 +219,6 @@ post http://localhost:3000/api/gamelinks
 Content-Type: application/json
 
 {
-    "id": 1,
     "gameId": 1,
     "link": "https://www.youtube.com/watch?v=mDYqT0_9VR4"
 }
@@ -250,5 +246,5 @@ delete http://localhost:3000/api/gamelinks
 Content-Type: application/json
 
 {
-    "id": 1
+    "id": 57
 }
