@@ -12,9 +12,11 @@ post http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-    "name": "Sándor Bernadett",
+    "firstname": "Bernadett",
+    "lastname": "Sándor",
     "email": "bernadett1104@gmail.com",
     "password": "admin",
+    "gender": "nő",
     "permission": 1
 }
 
@@ -31,11 +33,13 @@ put http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-    "name": "Sándor Bernadett",
+    "firstname": "Bernadett",
+    "lastname": "Sándor",
     "email": "bernadett1104@gmail.com",
     "password": "admin",
+    "gender": "férfi",
     "permission": 1,
-    "id": 4
+    "id": 7
 }
 
 ### Delete user
@@ -43,7 +47,7 @@ delete http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-    "id": 4
+    "id": 7
 }
 
 

@@ -60,9 +60,11 @@ Collate utf8_hungarian_ci;
 # Users létrehozás
 Create table videogames.users (
   id int(11) not null auto_increment,
-  name varchar(50) not null,
+  firstname varchar(50) not null,
+  lastname varchar(50) not null,
   email varchar(50) not null,
   password varchar(255) not null,
+  gender varchar(20) not null,
   permission int(11) not null,
   Primary key (id)
 )
@@ -222,7 +224,7 @@ Insert into videogames.gamelinks
 
 # Users adatgenerálás
 Insert into videogames.users 
-    (id, name, email, password, permission) 
+    (id, firstname, lastname, email, password, gender, permission) 
   Values 
-    (1, 'Nagy Sándor', 'sandor@gmail.com', 'admin', 1),
-    (2, 'Békefi Lili', 'lili@gmail.com', 'user', 2);
+    (1, 'Sándor', 'Nagy', 'sandor@gmail.com', 'admin', 'férfi', 1),
+    (2, 'Lili', 'Békefi', 'lili@gmail.com', 'nő' ,'user', 2);
