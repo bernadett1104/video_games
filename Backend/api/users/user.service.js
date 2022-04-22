@@ -3,9 +3,9 @@ const pool = require("../../config/database.js");
 module.exports = {
     create: (data, callBack) => {
         let queryString = `
-            Insert into users (firstname, lastname, email, password, gender, permission) values (?, ?, ?, ?, ?, ?)
+            Insert into users (firstname, lastname, email, password, gender, permission) values (?, ?, ?, ?, ?, 0)
         `
-        let params = Object.values(data);
+        let params = [data.firstname, data.lastname, data.email, data.password, data.gender, data.permission]
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
                 return callBack(error);

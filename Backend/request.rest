@@ -8,11 +8,11 @@ Content-Type: application/json
 }
 
 ### User add
-post http://localhost:3000/api/users
+post http://localhost:3000/api/users/registration
 Content-Type: application/json
 
 {
-    "firstname": "Bernadett",
+    "firstname": "Mark",
     "lastname": "Sándor",
     "email": "bernadett1104@gmail.com",
     "password": "admin",
@@ -47,7 +47,7 @@ delete http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-    "id": 7
+    "id": 8
 }
 
 

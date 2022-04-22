@@ -65,7 +65,7 @@ Create table videogames.users (
   email varchar(50) not null,
   password varchar(255) not null,
   gender varchar(20) not null,
-  permission int(11) not null,
+  permission int(11),,
   Primary key (id)
 )
 Engine = innodb,

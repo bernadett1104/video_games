@@ -49,7 +49,7 @@
                                 role="button"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                {{ $root.$data.user.firstName }}
+                                {{$root.$data.user.firstname}}
                             </a>
                             <ul
                                 class="dropdown-menu"

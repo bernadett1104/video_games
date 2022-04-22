@@ -1,10 +1,10 @@
 <template>
   <div class="my-border">
 		<h1>Profil</h1>
-        <p>Keresztnév: {{$root.$data.user.firstName}}</p>
-        <p>Vezetéknév: {{$root.$data.user.lastName}}</p>
-        <p>Email: {{$root.$data.user.email}}</p>
-        <p>Number: {{$root.$data.user.number}}</p>
+        <p>Vezetéknév: {{$root.$data.user.lastname}}</p>
+        <p>Keresztnév: {{$root.$data.user.firstname}}</p>
+        <p>E-mail: {{$root.$data.user.email}}</p>
+        <p>Neme: {{$root.$data.user.gender}}</p>
   </div>
 </template>
 

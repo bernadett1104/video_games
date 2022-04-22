@@ -1,41 +1,55 @@
 <template>
     <div class="my-border p-3">
         <h1 class="mb-4">Regisztráció</h1>
-        
-<form class="row g-3 needs-validation" novalidate>
-            <div class="col-md-4 position-relative">
-                <label for="validationTooltip01" class="form-label">First name</label>
-                <input type="text" class="form-control" id="validationTooltip01" value="Mark" required>
-                <div class="valid-tooltip">Looks good!</div>
+        <p>Kérjük adja meg az adatait a regisztrációhoz!</p>
+
+        <form class="needs-validation" novalidate>
+            <div class="row mb-3">
+                <label for="last_name" class="col-sm-1 col-form-label">Vezetéknév:</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control " id="last_name" placeholder="Sándor" v-model="registrationData.lastname" required>
+                </div>
+                <div class="invalid-feedback">Vezetéknév megadása kötelező!</div>
             </div>
             
-            <div class="col-md-4 position-relative">
-                <label for="validationTooltip02" class="form-label">Last name</label>
-                <input type="text" class="form-control" id="validationTooltip02" value="Otto" required>
-                <div class="valid-tooltip">Looks good!</div>
-            </div>
-
-            <div class="col-md-4 position-relative">
-                <label for="validationTooltipUsername" class="form-label">Username</label>
-                <div class="input-group has-validation">
-                    <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
-                    <input type="text" class="form-control" id="validationTooltipUsername" aria-describedby="validationTooltipUsernamePrepend" required>
-                    <div class="invalid-tooltip">Please choose a unique and valid usernamsere.</div>
+            <div class="row mb-3">
+                <label for="first_name" class="col-sm-1 col-form-label">Keresztnév:</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control " id="first_name" placeholder="Bernadett" v-model="registrationData.firstname" required>
                 </div>
+                <div class="invalid-feedback">Keresztnév megadása kötelező!</div>
             </div>
 
-            <div class="col-md-3 position-relative">
-                <label for="validationTooltip04" class="form-label">State</label>
-                <select class="form-select" id="validationTooltip04" required>
-                    <option selected disabled value="">Choose...</option>
-                    <option>...</option>
+            <div class="row mb-3">
+                <label for="email" class="col-sm-1 col-form-label">E-mail:</label>
+                <div class="col-sm-3">
+                    <input type="email" class="form-control " id="email" placeholder="bernadett@gmail.com" v-model="registrationData.email" required>
+                </div>
+                <div class="invalid-feedback">E-mail megadása kötelező!</div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="password" class="col-sm-1 col-form-label">Jelszó:</label>
+                <div class="col-sm-3">
+                    <input type="password" class="form-control " id="password" placeholder="EgyErősJelszó_12" v-model="registrationData.password" required>
+                </div>
+                <div class="invalid-feedback">Jelszó megadása kötelező!</div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="password" class="col-sm-1 col-form-label">Neme:</label>
+                <div class="col-sm-3">
+                    <select class="form-select" v-model="registrationData.gender" required>
+                    <option selected disabled value="">Válasz</option>
+                    <option>Nő</option>
+                    <option>Férfi</option>
+                    <option>Egyéb</option>
                 </select>
-            <div class="invalid-tooltip">Please select a valid state.</div>
+                </div>
+                <div class="invalid-feedback">Nem megadása kötelező!</div>
             </div>
 
-            <div class="col-12">
-                <button class="btn btn-primary" type="submit">Submit form</button>
-            </div>
+            <button type="button" class="btn btn-primary" @click="onClickSaveData()">Regisztráció</button>
         </form>
     </div>
 </template>
@@ -45,36 +59,34 @@ export default {
     name: "Registration",
     data() {
         return {
-            loginData: {
+            registrationData: {
+                firstname: "",
+                lastname: "",
                 email: "",
                 password: "",
-            },
-            loginResponse: {
-                success: 0,
-                message: "",
-                token: null,
+                gender: ""
             },
             noSuccess: false
         };
     },
+    mounted() {
+        this.form = document.querySelector(".needs-validation");
+    },
     methods: {
-        onClickLogin() {
-            const url = `${this.$loginServer}/api/users/login`;
+        onClickRegistration() {
+            const url = `${this.$loginServer}/api/users/registration`;
             let headers = new Headers();
             headers.append("Content-Type", "application/json");
             fetch(url, {
                 method: "POST", // or 'PUT'
                 headers: headers,
-                body: JSON.stringify(this.loginData),
+                body: JSON.stringify(this.registrationData),
             })
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data);
-                    this.loginResponse = data;
-                    this.$root.$data.token = data.token;
-                    this.$root.$data.user = data.data;
                     if (data.success) {
-                        this.$router.push({ path: "/"});
+                        this.$router.push({ path: "/login"});
                     } else {
                         this.noSuccess = true;
                         setTimeout(()=>{
@@ -85,6 +97,14 @@ export default {
                 .catch((error) => {
                     console.error("Error:", error);
                 });
+        },
+        onClickSaveData() {
+            this.form.classList.add("was-validated");
+            if (this.form.checkValidity()) {
+                    this.onClickRegistration();
+            } else {
+                return ;
+            }
         },
     },
 };

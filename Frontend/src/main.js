@@ -16,9 +16,9 @@ Vue.use(VueResource);
 Vue.use(VueRouter);
 
 class users {
-    constructor(firstName = null, lastName = null, gender = null, email = null) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    constructor(firstname = null, lastname = null, gender = null, email = null) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
         this.gender = gender;
     }
