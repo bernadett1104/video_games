@@ -1,7 +1,8 @@
 <template>
     <div class="my-border p-3">
         <h1 class="mb-4">Bejelentkezés</h1>
-        
+        <p>Kérjük jelentkezzen be a fiókjába! Ha még nincs fiókja, hozza létre <a href="#/registration">itt.</a></p>
+
         <form>
             <div class="row mb-3">
                 <label for="email" class="col-sm-1 col-form-label">E-mail :</label>

@@ -1,8 +1,8 @@
 <template>
-    <div class="my-border">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <router-link class="navbar-brand" to="/">Navbar</router-link>
+    <div>
+        <nav class="navbar p-3 navbar-expand-lg navbar-dark bg-dark">
+            <!-- <div class="container-fluid"> -->
+                <router-link class="navbar-brand" to="/">Infinity </router-link>
                 <button
                     class="navbar-toggler"
                     type="button"
@@ -74,7 +74,7 @@
 
                         <li class="nav-item" v-if="!loggedIn()">
                             <router-link class="nav-link" to="/login"
-                                >Login</router-link
+                                >Bejelentkezés</router-link
                             >
                         </li>
 
@@ -84,18 +84,8 @@
                             >
                         </li>
                     </ul>
-                    <form class="d-flex">
-                        <input
-                            class="form-control me-2"
-                            type="search"
-                            placeholder="Search"
-                            aria-label="Search" />
-                        <button class="btn btn-outline-success" type="submit">
-                            Search
-                        </button>
-                    </form>
                 </div>
-            </div>
+            <!-- </div> -->
         </nav>
     </div>
 </template>
@@ -103,17 +93,15 @@
 <script>
 class User {
     constructor(
-        firstName = null,
-        lastName = null,
+        firstname = null,
+        lastname = null,
         gender = null,
         email = null,
-        number = null
     ) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.gender = gender;
         this.email = email;
-        this.number = number;
     }
 }
 

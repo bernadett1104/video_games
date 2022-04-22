@@ -20,7 +20,7 @@
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
                     <input type="text" class="form-control" id="validationTooltipUsername" aria-describedby="validationTooltipUsernamePrepend" required>
-                    <div class="invalid-tooltip">Please choose a unique and valid username.</div>
+                    <div class="invalid-tooltip">Please choose a unique and valid usernamsere.</div>
                 </div>
             </div>
 
