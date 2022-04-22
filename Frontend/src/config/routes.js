@@ -2,13 +2,13 @@
 import Fooldal from "../components/routes/Fooldal.vue";
 import Users from "../components/routes/Users.vue";
 import Login from "../components/routes/Login.vue";
+import Registration from "../components/routes/Registration.vue";
 import NotFound from "../components/routes/NotFound.vue";
 import Profile from "../components/routes/Profile.vue";
 
 
 //2. route - komponens hozzárendelés
-const routes = [
-    {
+const routes = [{
         name: "users",
         path: "/users",
         component: Users,
@@ -28,6 +28,14 @@ const routes = [
         name: "login",
         path: "/login",
         component: Login,
+        meta: {
+            requiresAuth: false
+        }
+    },
+    {
+        name: "registration",
+        path: "/registration",
+        component: Registration,
         meta: {
             requiresAuth: false
         }

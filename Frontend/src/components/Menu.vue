@@ -49,7 +49,7 @@
                                 role="button"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                {{$root.$data.user.firstName}}
+                                {{ $root.$data.user.firstName }}
                             </a>
                             <ul
                                 class="dropdown-menu"
@@ -59,8 +59,7 @@
                                         class="dropdown-item"
                                         to="/login">
                                         Logout
-                                    </router-link
-                                    >
+                                    </router-link>
                                 </li>
                                 <li>
                                     <router-link
@@ -73,8 +72,16 @@
                         </li>
                         <!-- #endregion Login -->
 
-                        <li class="nav-item"  v-if="!loggedIn()">
-                            <router-link class="nav-link" to="/login">Login</router-link>
+                        <li class="nav-item" v-if="!loggedIn()">
+                            <router-link class="nav-link" to="/login"
+                                >Login</router-link
+                            >
+                        </li>
+
+                        <li class="nav-item" v-if="!loggedIn()">
+                            <router-link class="nav-link" to="/registration"
+                                >Regisztráció</router-link
+                            >
                         </li>
                     </ul>
                     <form class="d-flex">
