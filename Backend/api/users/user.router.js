@@ -43,11 +43,11 @@ router.get("/users/:id", checkToken, getUserByUserId);
 router.put("/users/", checkToken, updateUsers);
 router.delete("/users/", checkToken, deleteUser);
 
-router.post("/categories", checkToken, createCategory);
-router.get("/categories", checkToken, getCategories);
+router.post("/categories/newcategory", checkToken, createCategory);
+router.get("/categories/allcategories", checkToken, getCategories);
 router.get("/categories/:id", checkToken, getCategoriesById);
-router.put("/categories/", checkToken, updateCategory);
-router.delete("/categories/", checkToken, deleteCategory);
+router.put("/categories/categoryupdate", checkToken, updateCategory);
+router.delete("/categories/categorydelete", checkToken, deleteCategory);
 
 router.post("/developers", checkToken, createDeveloper);
 router.get("/developers", checkToken, getDevelopers);

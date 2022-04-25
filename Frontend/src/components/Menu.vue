@@ -2,7 +2,7 @@
     <div>
         <nav class="navbar p-3 navbar-expand-lg navbar-dark bg-dark">
             <!-- <div class="container-fluid"> -->
-                <router-link class="navbar-brand" to="/">Infinity </router-link>
+                <router-link class="navbar-brand" to="/">I N F I N I T Y </router-link>
                 <button
                     class="navbar-toggler"
                     type="button"
@@ -22,7 +22,7 @@
                                 class="nav-link active"
                                 aria-current="page"
                                 to="/">
-                                Home
+                                Videó Játékok
                             </router-link>
                         </li>
 
@@ -37,6 +37,24 @@
                                 aria-expanded="false">
                                 Adatkarbantartás
                             </a>
+                            <ul
+                                class="dropdown-menu"
+                                aria-labelledby="navbarDropdown">
+                                <li>
+                                    <router-link
+                                        class="dropdown-item"
+                                        to="/categories">
+                                        Kategóriák
+                                    </router-link>
+                                </li>
+                                <li @click.prevent="onClickLogout()">
+                                    <router-link
+                                        class="dropdown-item"
+                                        to="/login">
+                                        Kijelentkezés
+                                    </router-link>
+                                </li>
+                            </ul>
                         </li>
                         <!-- #endregion Adatkarbantartás -->
 
@@ -54,18 +72,18 @@
                             <ul
                                 class="dropdown-menu"
                                 aria-labelledby="navbarDropdown">
-                                <li @click.prevent="onClickLogout()">
-                                    <router-link
-                                        class="dropdown-item"
-                                        to="/login">
-                                        Logout
-                                    </router-link>
-                                </li>
                                 <li>
                                     <router-link
                                         class="dropdown-item"
                                         to="/profile">
-                                        Profil
+                                        Profilom
+                                    </router-link>
+                                </li>
+                                <li @click.prevent="onClickLogout()">
+                                    <router-link
+                                        class="dropdown-item"
+                                        to="/login">
+                                        Kijelentkezés
                                     </router-link>
                                 </li>
                             </ul>
@@ -119,4 +137,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>

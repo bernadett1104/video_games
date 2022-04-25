@@ -1,6 +1,6 @@
 <template>
   <div class="my-border">
-		<h1>Profil</h1>
+		<h1>Profilom Adatai:</h1>
         <p>Vezetéknév: {{$root.$data.user.lastname}}</p>
         <p>Keresztnév: {{$root.$data.user.firstname}}</p>
         <p>E-mail: {{$root.$data.user.email}}</p>

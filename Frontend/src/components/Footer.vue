@@ -1,5 +1,5 @@
 <template>
-<div class="my-border">
+<div class="my-border text-white bg-dark">
   <p>Footer</p>
 </div>
 </template>

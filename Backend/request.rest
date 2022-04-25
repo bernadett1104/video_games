@@ -57,32 +57,32 @@ Content-Type: application/json
 # Categories
 
 ### Category add
-post http://localhost:3000/api/categories
+post http://localhost:3000/api/categories/newcategory
 Content-Type: application/json
 
 {
-    "name": "singleplayer"
+    "name": "multiplayer"
 }
 
 ### Categories
-get http://localhost:3000/api/categories
+get http://localhost:3000/api/categories/allcategories
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
 
 ### One category
-get http://localhost:3000/api/categories/1
+get http://localhost:3000/api/categories/5
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
 
 ### Category edit
-put http://localhost:3000/api/categories
+put http://localhost:3000/api/categories/categoryupdate
 Content-Type: application/json
 
 {
     "name": "multiplayer_updated",
-    "id": 1
+    "id": 5
 }
 
 ### Delete category
-delete http://localhost:3000/api/categories
+delete http://localhost:3000/api/categories/categorydelete
 Content-Type: application/json
 
 {
