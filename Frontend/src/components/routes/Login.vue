@@ -22,7 +22,7 @@
         </form>
         
         <div class="alert alert-danger m-3" role="alert" v-if="noSuccess"> 
-            Bejelentkezés sikertelen: Rossz email vagy jelszó 
+            Bejelentkezés sikertelen: Rossz email vagy jelszó!
         </div>
     </div>
 </template>

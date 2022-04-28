@@ -131,9 +131,9 @@ module.exports = {
     },
     createDeveloper: (data, callBack) => {
         let queryString = `
-            Insert into developers (developer) values (?);
+            Insert into developers (name) values (?);
         `
-        let params = [data.developer];
+        let params = [data.name];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
                 return callBack(error);
@@ -165,9 +165,9 @@ module.exports = {
         });
     },
     updateDeveloper: (data, callBack) => {
-        const queryString = `Update developers set developer=? Where id= ?`;
+        const queryString = `Update developers set name=? Where id= ?`;
         const params = [
-            data.developer,
+            data.name,
             data.id
         ]
         console.log("Update developer:", params);

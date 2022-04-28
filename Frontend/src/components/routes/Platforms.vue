@@ -1,16 +1,15 @@
 <template>
-  <div class="my-border">
-      <h1>Kategóriák</h1>
-
+    <div class="my-border">
+        <h1>Platformok</h1>
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Kategória neve</th>
+                    <th scope="col">Platform neve</th>
                     <th scope="col">
                         <!-- new -->
                         <button
                             type="button"
-                            class="btn btn-success ms-1 btn-sm"
+                            class="btn btn-outline-success ms-1 btn-sm"
                             @click="onClickNew()">
                             <i class="bi bi-plus-lg"></i>
                         </button>
@@ -18,22 +17,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(category, index) in categories" :key="index">
-                    <td>{{ category.name }}</td>
+                <tr v-for="(platform, index) in platforms" :key="index">
+                    <td>{{ platform.name }}</td>
                     <td>
                         <!-- edit -->
                         <button
                             type="button"
-                            class="btn btn-dark ms-1 btn-sm"
-                            @click="onClickEdit(category.id)">
-                            <i class="bi bi-pencil-fill"></i>
+                            class="btn btn-outline-warning ms-1 btn-sm"
+                            @click="onClickEdit(platform.id)">
+                            <i class="bi bi-pencil"></i>
                         </button>
 
                         <!-- delete -->
                         <button
                             type="button"
-                            class="btn btn-danger ms-1 btn-sm"
-                            @click="onClickDelete(category.id)">
+                            class="btn btn-outline-danger ms-1 btn-sm"
+                            @click="onClickDelete(platform.id)">
                             <i class="bi bi-trash"></i>
                         </button>
                     </td>
@@ -61,23 +60,23 @@
                             aria-label="Close"
                             @click="onClickCancel()"></button>
                     </div>
-                    
+                    <!-- Űrlap -->
                     <div class="modal-body">
                         <form class="row g-3 needs-validation" novalidate>
-                            
+                            <!-- name -->
                             <div class="mb-3 col-12">
                                 <label for="name" class="form-label"
-                                    >Kategória neve:</label
+                                    >Név:</label
                                 >
                                 <input
                                     type="text"
                                     class="form-control"
                                     id="name"
-                                    placeholder="Név"
-                                    v-model="category.name"
+                                    placeholder="Platform neve"
+                                    v-model="platform.name"
                                     required />
                                 <div class="invalid-feedback">
-                                    A kategória neve kötelező!
+                                    A platform nevének megadása kötelező!
                                 </div>
                             </div>
                         </form>
@@ -93,18 +92,18 @@
                         <button
                             type="button"
                             class="btn btn-primary"
-                            @click="onClickSaveData()">
+                            @click="saveData()">
                             Mentés
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-  </div>
+    </div>
 </template>
 
 <script>
-class Category {
+class Plat {
     constructor(
         id = null,
         name = null,
@@ -115,34 +114,36 @@ class Category {
 }
 
 import * as bootstrap from "bootstrap";
+
 export default {
-    name: "CategoriesData",
+    name: "PlatformsData",
     data() {
         return {
-            categories: [],
+            platforms: [],
             state: "view",
             stateTitle: null,
-            category: new Category(),
+            platform: new Plat(),
             modal: null,
             form: null,
         };
     },
     created() {
-        this.getCategories();
+        this.getPlatforms();
     },
     mounted() {
         this.modal = new bootstrap.Modal(document.getElementById("modal"), {
-            Keyboard: false,
+            keyboard: false,
         });
+
         this.form = document.querySelector(".needs-validation");
     },
     methods: {
-        getCategories() {
+        getPlatforms() {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/categories`;
+            const url = `${this.$loginServer}/api/platforms`;
             fetch(url, {
                 method: "GET",
                 headers: headers,
@@ -150,20 +151,19 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.categories = data.data;
+                    this.platforms = data.data;
                 })
                 .catch((error) => {
                     console.error("Error:", error);
-                    this.categories = [];
+                    this.platforms = [];
                 });
         },
-        getCategoriesById(id) {
+        getPlatformsById(id) {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/categories/${id}`;
-            console.log(url);
+            const url = `${this.$loginServer}/api/platforms/${id}`;
             fetch(url, {
                 method: "GET",
                 headers: headers,
@@ -171,20 +171,20 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.category = data.data[0];
+                    this.platform = data.data[0];
                 })
                 .catch((error) => {
                     console.error("Error:", error);
-                    this.category = [];
+                    this.platform = [];
                 });
         },
-        updateCategory() {
+        updatePlatform() {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/categories/`;
-            let data = this.category;
+            const url = `${this.$loginServer}/api/platforms`;
+            let data = this.car;
             fetch(url, {
                 method: "PUT",
                 headers: headers,
@@ -193,18 +193,40 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.getCategories();
+                    this.getPlatforms();
                 })
                 .catch((error) => {
                     console.error("Error:", error);
                 });
         },
-        deleteCategory(id) {
+        createPlatform() {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/categories/`;
+            const url = `${this.$loginServer}/api/platforms`;
+            let data = this.platform;
+            delete data.id;
+            fetch(url, {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify(data),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Success:", data.data);
+                    this.getPlatforms();
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+        },
+        deletePlatform(id) {
+            let headers = new Headers();
+
+            headers.append("Content-Type", "application/json");
+            headers.append("Authorization", "Bearer " + this.$root.$data.token);
+            const url = `${this.$loginServer}/api/platforms`;
             let data = {
                 id: id,
             };
@@ -216,29 +238,7 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.getCategories();
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                });
-        },
-        createCategory() {
-            let headers = new Headers();
-
-            headers.append("Content-Type", "application/json");
-            headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/categories`;
-            let data = this.category;
-            delete data.id;
-            fetch(url, {
-                method: "POST",
-                headers: headers,
-                body: JSON.stringify(data),
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log("Success:", data.data);
-                    this.getCategories();
+                    this.getPlatforms();
                 })
                 .catch((error) => {
                     console.error("Error:", error);
@@ -246,43 +246,41 @@ export default {
         },
         onClickNew() {
             this.state = "new";
-            this.stateTitle = "Új Kategória";
-            this.category = new Category();
+            this.stateTitle = "Új platform";
+            this.platform = new Plat();
             this.modal.show();
         },
         onClickEdit(id) {
             this.state = "edit";
             this.stateTitle = "Adatmódosítás";
-            this.getCategoriesById(id);
+            this.getPlatformsById(id);
             this.modal.show();
         },
         onClickDelete(id) {
             this.state = "delete";
-            this.deleteCategory(id);
+            this.deletePlatform(id);
             this.state = "view";
         },
         onClickCancel() {
             this.state = "view";
             this.modal.hide();
         },
-        onClickSaveData() {
-            this.form.classList.add("was-validated");
+        saveData() {
+            this.form.classList.add('was-validated')
             if (this.form.checkValidity()) {
                 if (this.state == "edit") {
-                    this.updateCategory();
+                    //put
+                    this.updatePlatform();
                 } else if (this.state == "new") {
-                    this.createCategory();
+                    //post
+                    this.createPlatform();
                 }
                 this.modal.hide();
                 this.state = "view";
-            } else {
-                return;
+            }else{
+                return
             }
-        }
+        },
     }
 }
 </script>
-
-<style>
-
-</style>

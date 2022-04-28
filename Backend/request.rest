@@ -57,7 +57,7 @@ Content-Type: application/json
 # Categories
 
 ### Category add
-post http://localhost:3000/api/categories/newcategory
+post http://localhost:3000/api/categories
 Content-Type: application/json
 
 {
@@ -65,7 +65,7 @@ Content-Type: application/json
 }
 
 ### Categories
-get http://localhost:3000/api/categories/allcategories
+get http://localhost:3000/api/categories
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
 
 ### One category
@@ -73,16 +73,16 @@ get http://localhost:3000/api/categories/5
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
 
 ### Category edit
-put http://localhost:3000/api/categories/categoryupdate
+put http://localhost:3000/api/categories/
 Content-Type: application/json
 
 {
     "name": "multiplayer_updated",
-    "id": 5
+    "id": 4
 }
 
 ### Delete category
-delete http://localhost:3000/api/categories/categorydelete
+delete http://localhost:3000/api/categories/
 Content-Type: application/json
 
 {
@@ -107,17 +107,17 @@ Content-Type: application/json
 get http://localhost:3000/api/developers
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
 
-### One ceveloper
-get http://localhost:3000/api/developers/1
+### One developer
+get http://localhost:3000/api/developers/9
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
 
-### Decelopers edit
+### Developers edit
 put http://localhost:3000/api/developers
 Content-Type: application/json
 
 {
     "developers": "Riot Games_updated",
-    "id": 1
+    "id": 9
 }
 
 ### Delete developer
@@ -147,7 +147,7 @@ get http://localhost:3000/api/platforms
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
 
 ### One Platform
-get http://localhost:3000/api/platforms/1
+get http://localhost:3000/api/platforms/10
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
 
 ### Platforms edit
@@ -156,7 +156,7 @@ Content-Type: application/json
 
 {
     "name": "PC_updated",
-    "id": 1
+    "id": 10
 }
 
 ### Delete platform

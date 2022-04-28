@@ -6,6 +6,8 @@ import Registration from "../components/routes/Registration.vue";
 import NotFound from "../components/routes/NotFound.vue";
 import Profile from "../components/routes/Profile.vue";
 import CategoriesData from "../components/routes/Categories.vue";
+import PlatformsData from "../components/routes/Platforms.vue";
+import DevelopersData from "../components/routes/Developers.vue";
 
 
 //2. route - komponens hozzárendelés
@@ -45,6 +47,22 @@ const routes = [{
         name: "categories",
         path: "/categories",
         component: CategoriesData,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "developers",
+        path: "/developers",
+        component: DevelopersData,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "platforms",
+        path: "/platforms",
+        component: PlatformsData,
         meta: {
             requiresAuth: true
         }

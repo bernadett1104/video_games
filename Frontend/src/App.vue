@@ -29,16 +29,16 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 
 .my-border {
-    border: 1px dashed black;
-    padding: 0 10px;
+    /* border: 1px dashed black; */
+    /* padding: 0 10px; */
     background-color: #D1E0F8;
-
+    max-width: 1400px;
+    border: 2px solid rgb(35, 35, 35);
 }
 
 .container {
-    max-width: 400px;
-    margin: 20px auto;
+    margin: 20px;
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 18px;
+    font-size: 20px;
 }
 </style>

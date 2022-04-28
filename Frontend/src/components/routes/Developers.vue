@@ -1,16 +1,16 @@
 <template>
   <div class="my-border">
-      <h1>Kategóriák</h1>
+      <h1>Fejlesztők</h1>
 
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Kategória neve</th>
+                    <th scope="col">Fejlesztő neve</th>
                     <th scope="col">
                         <!-- new -->
                         <button
                             type="button"
-                            class="btn btn-success ms-1 btn-sm"
+                            class="btn btn-outline-success ms-1 btn-sm"
                             @click="onClickNew()">
                             <i class="bi bi-plus-lg"></i>
                         </button>
@@ -18,22 +18,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(category, index) in categories" :key="index">
-                    <td>{{ category.name }}</td>
+                <tr v-for="(developer, index) in developers" :key="index">
+                    <td>{{ developer.name }}</td>
                     <td>
                         <!-- edit -->
                         <button
                             type="button"
-                            class="btn btn-dark ms-1 btn-sm"
-                            @click="onClickEdit(category.id)">
-                            <i class="bi bi-pencil-fill"></i>
+                            class="btn btn-outline-warning ms-1 btn-sm"
+                            @click="onClickEdit(developer.id)">
+                            <i class="bi bi-pencil"></i>
                         </button>
 
                         <!-- delete -->
                         <button
                             type="button"
-                            class="btn btn-danger ms-1 btn-sm"
-                            @click="onClickDelete(category.id)">
+                            class="btn btn-outline-danger ms-1 btn-sm"
+                            @click="onClickDelete(developer.id)">
                             <i class="bi bi-trash"></i>
                         </button>
                     </td>
@@ -67,17 +67,17 @@
                             
                             <div class="mb-3 col-12">
                                 <label for="name" class="form-label"
-                                    >Kategória neve:</label
+                                    >Fejlesztő neve:</label
                                 >
                                 <input
                                     type="text"
                                     class="form-control"
                                     id="name"
                                     placeholder="Név"
-                                    v-model="category.name"
+                                    v-model="developer.name"
                                     required />
                                 <div class="invalid-feedback">
-                                    A kategória neve kötelező!
+                                    A fejlesztő neve kötelező!
                                 </div>
                             </div>
                         </form>
@@ -104,7 +104,7 @@
 </template>
 
 <script>
-class Category {
+class Dev {
     constructor(
         id = null,
         name = null,
@@ -116,19 +116,19 @@ class Category {
 
 import * as bootstrap from "bootstrap";
 export default {
-    name: "CategoriesData",
+    name: "DevelopersData",
     data() {
         return {
-            categories: [],
+            developers: [],
             state: "view",
             stateTitle: null,
-            category: new Category(),
+            developer: new Dev(),
             modal: null,
             form: null,
         };
     },
     created() {
-        this.getCategories();
+        this.getDevelopers();
     },
     mounted() {
         this.modal = new bootstrap.Modal(document.getElementById("modal"), {
@@ -137,12 +137,12 @@ export default {
         this.form = document.querySelector(".needs-validation");
     },
     methods: {
-        getCategories() {
+        getDevelopers() {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/categories`;
+            const url = `${this.$loginServer}/api/developers`;
             fetch(url, {
                 method: "GET",
                 headers: headers,
@@ -150,19 +150,19 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.categories = data.data;
+                    this.developers = data.data;
                 })
                 .catch((error) => {
                     console.error("Error:", error);
-                    this.categories = [];
+                    this.developers = [];
                 });
         },
-        getCategoriesById(id) {
+        getDevelopersById(id) {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/categories/${id}`;
+            const url = `${this.$loginServer}/api/developers/${id}`;
             console.log(url);
             fetch(url, {
                 method: "GET",
@@ -171,20 +171,20 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.category = data.data[0];
+                    this.developer = data.data[0];
                 })
                 .catch((error) => {
                     console.error("Error:", error);
-                    this.category = [];
+                    this.developer = [];
                 });
         },
-        updateCategory() {
+        updateDeveloper() {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/categories/`;
-            let data = this.category;
+            const url = `${this.$loginServer}/api/developers/`;
+            let data = this.developer;
             fetch(url, {
                 method: "PUT",
                 headers: headers,
@@ -193,18 +193,18 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.getCategories();
+                    this.getDevelopers();
                 })
                 .catch((error) => {
                     console.error("Error:", error);
                 });
         },
-        deleteCategory(id) {
+        deleteDeveloper(id) {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/categories/`;
+            const url = `${this.$loginServer}/api/developers/`;
             let data = {
                 id: id,
             };
@@ -216,19 +216,19 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.getCategories();
+                    this.getDevelopers();
                 })
                 .catch((error) => {
                     console.error("Error:", error);
                 });
         },
-        createCategory() {
+        createDeveloper() {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/categories`;
-            let data = this.category;
+            const url = `${this.$loginServer}/api/developers`;
+            let data = this.developer;
             delete data.id;
             fetch(url, {
                 method: "POST",
@@ -238,7 +238,7 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.getCategories();
+                    this.getDevelopers();
                 })
                 .catch((error) => {
                     console.error("Error:", error);
@@ -246,19 +246,19 @@ export default {
         },
         onClickNew() {
             this.state = "new";
-            this.stateTitle = "Új Kategória";
-            this.category = new Category();
+            this.stateTitle = "Új fejlesztő";
+            this.developer = new Dev();
             this.modal.show();
         },
         onClickEdit(id) {
             this.state = "edit";
             this.stateTitle = "Adatmódosítás";
-            this.getCategoriesById(id);
+            this.getDevelopersById(id);
             this.modal.show();
         },
         onClickDelete(id) {
             this.state = "delete";
-            this.deleteCategory(id);
+            this.deleteDeveloper(id);
             this.state = "view";
         },
         onClickCancel() {
@@ -269,9 +269,9 @@ export default {
             this.form.classList.add("was-validated");
             if (this.form.checkValidity()) {
                 if (this.state == "edit") {
-                    this.updateCategory();
+                    this.updateDeveloper();
                 } else if (this.state == "new") {
-                    this.createCategory();
+                    this.createDeveloper();
                 }
                 this.modal.hide();
                 this.state = "view";

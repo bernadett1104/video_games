@@ -6,6 +6,9 @@ Select * from games;
 Select * from platforms;
 Select * from users;
 
+# api/getusers
+Select * from users;
+
 # Táblák törlése
 Delete from categories;
 Delete from developers;
@@ -25,7 +28,7 @@ Insert into gamelinks (id, gameId, link) values (1, 1, 'https://www.youtube.com/
 Insert into users (id, firstname, lastname, email, password, gender, permission) values (1, 'Test', 'NeveTest', 'sandor@gmail.com', 'admin', 'nő', 1);
 
 # Keresés id alapján
-Select * from categories where id = 1;
+Select * from categories where id = 4;
 Select * from developers where id = 1;
 Select * from platforms where id = 1;
 Select * from games where id = 1;

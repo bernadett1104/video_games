@@ -16,7 +16,7 @@ Collate utf8_hungarian_ci;
 # Developers létrehozás
 Create table videogames.developers (
   id int(11) not null auto_increment,
-  developer varchar(255) not null,
+  name varchar(255) not null,
   Primary key (id)
 )
 Engine = innodb,
