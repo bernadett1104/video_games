@@ -1,10 +1,10 @@
 <template>
-    <div class="my-border p-3">
+    <div class="my-border p-3 tocenter">
         <h1 class="mb-4">Regisztráció</h1>
         <p>Kérjük adja meg az adatait a regisztrációhoz!</p>
 
         <form class="needs-validation" novalidate>
-            <div class="row mb-3">
+            <div class="row mb-3 col-sm-3 center ">
                 <label for="last_name" class="col-sm-1 col-form-label">Vezetéknév:</label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control " id="last_name" placeholder="Sándor" v-model="registrationData.lastname" required>
@@ -12,7 +12,7 @@
                 <div class="invalid-feedback">Vezetéknév megadása kötelező!</div>
             </div>
             
-            <div class="row mb-3">
+            <div class="row mb-3 center">
                 <label for="first_name" class="col-sm-1 col-form-label">Keresztnév:</label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control " id="first_name" placeholder="Bernadett" v-model="registrationData.firstname" required>
@@ -20,7 +20,7 @@
                 <div class="invalid-feedback">Keresztnév megadása kötelező!</div>
             </div>
 
-            <div class="row mb-3">
+            <div class="row mb-3 center">
                 <label for="email" class="col-sm-1 col-form-label">E-mail:</label>
                 <div class="col-sm-3">
                     <input type="email" class="form-control " id="email" placeholder="bernadett@gmail.com" v-model="registrationData.email" required>
@@ -28,7 +28,7 @@
                 <div class="invalid-feedback">E-mail megadása kötelező!</div>
             </div>
 
-            <div class="row mb-3">
+            <div class="row mb-3 center">
                 <label for="password" class="col-sm-1 col-form-label">Jelszó:</label>
                 <div class="col-sm-3">
                     <input type="password" class="form-control " id="password" placeholder="EgyErősJelszó_12" v-model="registrationData.password" required>
@@ -36,7 +36,7 @@
                 <div class="invalid-feedback">Jelszó megadása kötelező!</div>
             </div>
 
-            <div class="row mb-3">
+            <div class="row mb-3 center">
                 <label for="password" class="col-sm-1 col-form-label">Neme:</label>
                 <div class="col-sm-3">
                     <select class="form-select" v-model="registrationData.gender" required>
@@ -110,4 +110,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.tocenter {
+    text-align: center;
+}
+
+.center {
+    text-align: justify;
+    margin: 0 32%;
+    width: 110%;
+}
+</style>

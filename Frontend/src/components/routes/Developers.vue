@@ -10,7 +10,7 @@
                         <!-- new -->
                         <button
                             type="button"
-                            class="btn btn-outline-success ms-1 btn-sm"
+                            class="btn btn-success ms-1 btn-sm"
                             @click="onClickNew()">
                             <i class="bi bi-plus-lg"></i>
                         </button>
@@ -24,7 +24,7 @@
                         <!-- edit -->
                         <button
                             type="button"
-                            class="btn btn-outline-warning ms-1 btn-sm"
+                            class="btn btn-warning ms-1 btn-sm"
                             @click="onClickEdit(developer.id)">
                             <i class="bi bi-pencil"></i>
                         </button>
@@ -32,7 +32,7 @@
                         <!-- delete -->
                         <button
                             type="button"
-                            class="btn btn-outline-danger ms-1 btn-sm"
+                            class="btn btn-danger ms-1 btn-sm"
                             @click="onClickDelete(developer.id)">
                             <i class="bi bi-trash"></i>
                         </button>

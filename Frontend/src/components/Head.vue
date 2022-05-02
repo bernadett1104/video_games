@@ -1,7 +1,6 @@
 <template>
-  <div class="my-border">
-      <h1>Head</h1>
-  </div>
+    <div class="head">
+    </div>
 </template>
 
 <script>
@@ -11,5 +10,8 @@ export default {
 </script>
 
 <style>
-
+.head {
+  padding-bottom: 165px;
+  background: url(header_asd.png);
+}
 </style>
