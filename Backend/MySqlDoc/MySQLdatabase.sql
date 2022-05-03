@@ -1,13 +1,15 @@
-﻿# Táblák lekérdezése
+﻿# api/users
+Select * from users;
+# api/categories
 Select * from categories;
+# api/developers
 Select * from developers;
-Select * from gamelinks;
-Select * from games;
+# api/platforms
 Select * from platforms;
-Select * from users;
-
-# api/getusers
-Select * from users;
+# api/games
+Select * from games;
+# api/gamelinks
+Select * from gamelinks;
 
 # Táblák törlése
 Delete from categories;

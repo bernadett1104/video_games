@@ -101,7 +101,7 @@ Insert into videogames.categories
 
 # Developers adatgenerálás
 Insert into videogames.developers 
-    (id, developer) 
+    (id, name) 
   Values 
     (1, 'Riot Games'),
     (2, 'Psyonix'),
