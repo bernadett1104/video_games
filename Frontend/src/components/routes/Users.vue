@@ -29,10 +29,6 @@ export default {
                 "Authorization",
                 "Bearer " + this.$root.$data.token
             );
-            // headers.append("Accept", "application/json");
-            // );
-            // headers.append("Origin", "http://localhost:3000");
-
             const url = `${this.$loginServer}/api/users`;
             fetch(url,{
                 method: "GET",

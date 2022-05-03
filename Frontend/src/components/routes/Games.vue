@@ -1,11 +1,14 @@
 <template>
-  <div class="my-border">
-      <h1>Platformok</h1>
+    <div class="my-border">
+        <h1>Játékok</h1>
 
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Platform neve</th>
+                    <th scope="col">Fejlesztő</th>
+                    <th scope="col">Játékok</th>
+                    <th scope="col">Categória</th>
+                    <th scope="col">Platform</th>
                     <th scope="col">
                         <!-- new -->
                         <button
@@ -18,14 +21,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(platform, index) in platforms" :key="index">
-                    <td>{{ platform.name }}</td>
+                <tr v-for="(game, index) in games" :key="index">
+                    <td>{{ game.developerId }}</td>
+                    <td>{{ game.gameName }}</td>
+                    <td>{{ game.categoryId }}</td>
+                    <td>{{ game.platformId }}</td>
                     <td>
                         <!-- edit -->
                         <button
                             type="button"
                             class="btn btn-dark ms-1 btn-sm"
-                            @click="onClickEdit(platform.id)">
+                            @click="onClickEdit(game.id)">
                             <i class="bi bi-pencil"></i>
                         </button>
 
@@ -33,7 +39,7 @@
                         <button
                             type="button"
                             class="btn btn-danger ms-1 btn-sm"
-                            @click="onClickDelete(platform.id)">
+                            @click="onClickDelete(game.id)">
                             <i class="bi bi-trash"></i>
                         </button>
                     </td>
@@ -61,23 +67,70 @@
                             aria-label="Close"
                             @click="onClickCancel()"></button>
                     </div>
-                    
+
                     <div class="modal-body">
                         <form class="row g-3 needs-validation" novalidate>
-                            
                             <div class="mb-3 col-12">
-                                <label for="name" class="form-label"
-                                    >Platform neve:</label
+                                <label for="developerId" class="form-label"
+                                    >Fejlesztő neve:</label
+                                >
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="developerId"
+                                    placeholder="Fejlesztő neve"
+                                    v-model="game.developerId"
+                                    required />
+                                <div class="invalid-feedback">
+                                    A fejlesztő neve kötelező!
+                                </div>
+                            </div>
+
+                            <div class="mb-3 col-12">
+                                <label for="gameName" class="form-label"
+                                    >Játék neve:</label
                                 >
                                 <input
                                     type="text"
                                     class="form-control"
-                                    id="name"
+                                    id="gameName"
                                     placeholder="Név"
-                                    v-model="platform.name"
+                                    v-model="game.gameName"
                                     required />
                                 <div class="invalid-feedback">
-                                    A platform neve kötelező!
+                                    A játék neve kötelező!
+                                </div>
+                            </div>
+
+                            <div class="mb-3 col-12">
+                                <label for="categoryId" class="form-label"
+                                    >Categoria neve:</label
+                                >
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="categoryId"
+                                    placeholder="Név"
+                                    v-model="game.categoryId"
+                                    required />
+                                <div class="invalid-feedback">
+                                    A categoria megadása kötelező!
+                                </div>
+                            </div>
+
+                            <div class="mb-3 col-12">
+                                <label for="platformId" class="form-label"
+                                    >Platform neve:</label
+                                >
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="platformId"
+                                    placeholder="Név"
+                                    v-model="game.platformId"
+                                    required />
+                                <div class="invalid-feedback">
+                                    A platform megadása kötelező!
                                 </div>
                             </div>
                         </form>
@@ -100,36 +153,41 @@
                 </div>
             </div>
         </div>
-  </div>
-
+    </div>
 </template>
 
 <script>
-class Plat {
+class Game {
     constructor(
         id = null,
-        name = null,
+        developerId = null,
+        gameName = null,
+        categoryId = null,
+        platformId = null
     ) {
         this.id = id;
-        this.name = name;
+        this.developerId = developerId;
+        this.gameName = gameName;
+        this.categoryId = categoryId;
+        this.platformId = platformId;
     }
 }
 
 import * as bootstrap from "bootstrap";
 export default {
-    name: "PlatformsData",
+    name: "GamesData",
     data() {
         return {
-            platforms: [],
+            games: [],
             state: "view",
             stateTitle: null,
-            platform: new Plat(),
+            game: new Game(),
             modal: null,
             form: null,
         };
     },
     created() {
-        this.getPlatforms();
+        this.getGames();
     },
     mounted() {
         this.modal = new bootstrap.Modal(document.getElementById("modal"), {
@@ -138,12 +196,12 @@ export default {
         this.form = document.querySelector(".needs-validation");
     },
     methods: {
-        getPlatforms() {
+        getGames() {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/platforms`;
+            const url = `${this.$loginServer}/api/games`;
             fetch(url, {
                 method: "GET",
                 headers: headers,
@@ -151,19 +209,19 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.platforms = data.data;
+                    this.games = data.data;
                 })
                 .catch((error) => {
                     console.error("Error:", error);
-                    this.platforms = [];
+                    this.games = [];
                 });
         },
-        getPlatformsById(id) {
+        getGamesById(id) {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/platforms/${id}`;
+            const url = `${this.$loginServer}/api/games/${id}`;
             console.log(url);
             fetch(url, {
                 method: "GET",
@@ -172,20 +230,20 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.platform = data.data[0];
+                    this.game = data.data[0];
                 })
                 .catch((error) => {
                     console.error("Error:", error);
-                    this.platform = [];
+                    this.game = [];
                 });
         },
-        updatePlatform() {
+        updateGame() {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/platforms/`;
-            let data = this.platform;
+            const url = `${this.$loginServer}/api/games/`;
+            let data = this.game;
             fetch(url, {
                 method: "PUT",
                 headers: headers,
@@ -194,18 +252,18 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.getPlatforms();
+                    this.getGames();
                 })
                 .catch((error) => {
                     console.error("Error:", error);
                 });
         },
-        deletePlatform(id) {
+        deleteGame(id) {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/platforms/`;
+            const url = `${this.$loginServer}/api/games/`;
             let data = {
                 id: id,
             };
@@ -217,19 +275,19 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.getPlatforms();
+                    this.getGames();
                 })
                 .catch((error) => {
                     console.error("Error:", error);
                 });
         },
-        createPlatform() {
+        createGame() {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/platforms`;
-            let data = this.platform;
+            const url = `${this.$loginServer}/api/games`;
+            let data = this.game;
             delete data.id;
             fetch(url, {
                 method: "POST",
@@ -239,7 +297,7 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.getPlatforms();
+                    this.getGames();
                 })
                 .catch((error) => {
                     console.error("Error:", error);
@@ -247,19 +305,19 @@ export default {
         },
         onClickNew() {
             this.state = "new";
-            this.stateTitle = "Új Platform";
-            this.platform = new Plat();
+            this.stateTitle = "Új játék";
+            this.game = new Game();
             this.modal.show();
         },
         onClickEdit(id) {
             this.state = "edit";
             this.stateTitle = "Adatmódosítás";
-            this.getPlatformsById(id);
+            this.getGamesById(id);
             this.modal.show();
         },
         onClickDelete(id) {
             this.state = "delete";
-            this.deletePlatform(id);
+            this.deleteGame(id);
             this.state = "view";
         },
         onClickCancel() {
@@ -270,9 +328,9 @@ export default {
             this.form.classList.add("was-validated");
             if (this.form.checkValidity()) {
                 if (this.state == "edit") {
-                    this.updatePlatform();
+                    this.updateGame();
                 } else if (this.state == "new") {
-                    this.createPlatform();
+                    this.createGame();
                 }
                 this.modal.hide();
                 this.state = "view";

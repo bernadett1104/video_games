@@ -8,6 +8,8 @@ import Profile from "../components/routes/Profile.vue";
 import CategoriesData from "../components/routes/Categories.vue";
 import PlatformsData from "../components/routes/Platforms.vue";
 import DevelopersData from "../components/routes/Developers.vue";
+import GamesData from "../components/routes/Games.vue";
+import LinksData from "../components/routes/Links.vue";
 
 
 //2. route - komponens hozzárendelés
@@ -41,6 +43,22 @@ const routes = [{
         component: Registration,
         meta: {
             requiresAuth: false
+        }
+    },
+    {
+        name: "games",
+        path: "/games",
+        component: GamesData,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "gamelinks",
+        path: "/gamelinks",
+        component: LinksData,
+        meta: {
+            requiresAuth: true
         }
     },
     {

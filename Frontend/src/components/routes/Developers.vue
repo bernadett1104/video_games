@@ -24,7 +24,7 @@
                         <!-- edit -->
                         <button
                             type="button"
-                            class="btn btn-warning ms-1 btn-sm"
+                            class="btn btn-dark ms-1 btn-sm"
                             @click="onClickEdit(developer.id)">
                             <i class="bi bi-pencil"></i>
                         </button>

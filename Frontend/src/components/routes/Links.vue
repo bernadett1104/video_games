@@ -1,11 +1,12 @@
 <template>
-  <div class="my-border">
-      <h1>Platformok</h1>
+    <div class="my-border">
+        <h1>Linkek</h1>
 
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Platform neve</th>
+                    <th scope="col">Játék</th>
+                    <th scope="col">Link</th>
                     <th scope="col">
                         <!-- new -->
                         <button
@@ -18,14 +19,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(platform, index) in platforms" :key="index">
-                    <td>{{ platform.name }}</td>
+                <tr v-for="(vlink, index) in gamelinks" :key="index">
+                    <td>{{ vlink.gameId }}</td>
+                    <td>{{ vlink.link }}</td>
                     <td>
                         <!-- edit -->
                         <button
                             type="button"
                             class="btn btn-dark ms-1 btn-sm"
-                            @click="onClickEdit(platform.id)">
+                            @click="onClickEdit(vlink.id)">
                             <i class="bi bi-pencil"></i>
                         </button>
 
@@ -33,7 +35,7 @@
                         <button
                             type="button"
                             class="btn btn-danger ms-1 btn-sm"
-                            @click="onClickDelete(platform.id)">
+                            @click="onClickDelete(vlink.id)">
                             <i class="bi bi-trash"></i>
                         </button>
                     </td>
@@ -61,23 +63,38 @@
                             aria-label="Close"
                             @click="onClickCancel()"></button>
                     </div>
-                    
+
                     <div class="modal-body">
                         <form class="row g-3 needs-validation" novalidate>
-                            
                             <div class="mb-3 col-12">
-                                <label for="name" class="form-label"
-                                    >Platform neve:</label
+                                <label for="gameId" class="form-label"
+                                    >Játék neve:</label
                                 >
                                 <input
                                     type="text"
                                     class="form-control"
-                                    id="name"
+                                    id="gameId"
                                     placeholder="Név"
-                                    v-model="platform.name"
+                                    v-model="vlink.gameId"
                                     required />
                                 <div class="invalid-feedback">
-                                    A platform neve kötelező!
+                                    A játék neve kötelező!
+                                </div>
+                            </div>
+
+                            <div class="mb-3 col-12">
+                                <label for="link" class="form-label"
+                                    >Videó Link:</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="link"
+                                    placeholder="Név"
+                                    v-model="vlink.link"
+                                    required />
+                                <div class="invalid-feedback">
+                                    Link megadása kötelező!
                                 </div>
                             </div>
                         </form>
@@ -100,36 +117,37 @@
                 </div>
             </div>
         </div>
-  </div>
-
+    </div>
 </template>
 
 <script>
-class Plat {
+class Clink {
     constructor(
         id = null,
-        name = null,
+        gameId = null,
+        link = null,
     ) {
         this.id = id;
-        this.name = name;
+        this.gameId = gameId;
+        this.link = link;
     }
 }
 
 import * as bootstrap from "bootstrap";
 export default {
-    name: "PlatformsData",
+    name: "LinksData",
     data() {
         return {
-            platforms: [],
+            gamelinks: [],
             state: "view",
             stateTitle: null,
-            platform: new Plat(),
+            vlink: new Clink(),
             modal: null,
             form: null,
         };
     },
     created() {
-        this.getPlatforms();
+        this.getGamelinks();
     },
     mounted() {
         this.modal = new bootstrap.Modal(document.getElementById("modal"), {
@@ -138,12 +156,12 @@ export default {
         this.form = document.querySelector(".needs-validation");
     },
     methods: {
-        getPlatforms() {
+        getGamelinks() {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/platforms`;
+            const url = `${this.$loginServer}/api/gamelinks`;
             fetch(url, {
                 method: "GET",
                 headers: headers,
@@ -151,19 +169,19 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.platforms = data.data;
+                    this.gamelinks = data.data;
                 })
                 .catch((error) => {
                     console.error("Error:", error);
-                    this.platforms = [];
+                    this.gamelinks = [];
                 });
         },
-        getPlatformsById(id) {
+        getGamelinksById(id) {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/platforms/${id}`;
+            const url = `${this.$loginServer}/api/gamelinks/${id}`;
             console.log(url);
             fetch(url, {
                 method: "GET",
@@ -172,20 +190,20 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.platform = data.data[0];
+                    this.vlink = data.data[0];
                 })
                 .catch((error) => {
                     console.error("Error:", error);
-                    this.platform = [];
+                    this.vlink = [];
                 });
         },
-        updatePlatform() {
+        updateGamelink() {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/platforms/`;
-            let data = this.platform;
+            const url = `${this.$loginServer}/api/gamelinks/`;
+            let data = this.vlink;
             fetch(url, {
                 method: "PUT",
                 headers: headers,
@@ -194,18 +212,18 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.getPlatforms();
+                    this.getGamelinks();
                 })
                 .catch((error) => {
                     console.error("Error:", error);
                 });
         },
-        deletePlatform(id) {
+        deleteGamelink(id) {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/platforms/`;
+            const url = `${this.$loginServer}/api/gamelinks/`;
             let data = {
                 id: id,
             };
@@ -217,19 +235,19 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.getPlatforms();
+                    this.getGamelinks();
                 })
                 .catch((error) => {
                     console.error("Error:", error);
                 });
         },
-        createPlatform() {
+        createGamelink() {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/platforms`;
-            let data = this.platform;
+            const url = `${this.$loginServer}/api/gamelinks`;
+            let data = this.vlink;
             delete data.id;
             fetch(url, {
                 method: "POST",
@@ -239,7 +257,7 @@ export default {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("Success:", data.data);
-                    this.getPlatforms();
+                    this.getGamelinks();
                 })
                 .catch((error) => {
                     console.error("Error:", error);
@@ -247,19 +265,19 @@ export default {
         },
         onClickNew() {
             this.state = "new";
-            this.stateTitle = "Új Platform";
-            this.platform = new Plat();
+            this.stateTitle = "Új link";
+            this.vlink = new Clink();
             this.modal.show();
         },
         onClickEdit(id) {
             this.state = "edit";
             this.stateTitle = "Adatmódosítás";
-            this.getPlatformsById(id);
+            this.getGamelinksById(id);
             this.modal.show();
         },
         onClickDelete(id) {
             this.state = "delete";
-            this.deletePlatform(id);
+            this.deleteGamelink(id);
             this.state = "view";
         },
         onClickCancel() {
@@ -270,9 +288,9 @@ export default {
             this.form.classList.add("was-validated");
             if (this.form.checkValidity()) {
                 if (this.state == "edit") {
-                    this.updatePlatform();
+                    this.updateGamelink();
                 } else if (this.state == "new") {
-                    this.createPlatform();
+                    this.createGamelink();
                 }
                 this.modal.hide();
                 this.state = "view";

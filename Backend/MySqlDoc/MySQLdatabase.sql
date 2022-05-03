@@ -23,7 +23,7 @@ Delete from users;
 Insert into categories (id, name) values (1, 'multiplayer');
 Insert into developers (id, developer) values (1, 'Riot Games');
 Insert into platforms (id, name) values (1, 'PC');
-Insert into games (id, developerId, gameName, categoryId, platformId) values (1,1, 'League Of Legends', 1,1);
+Insert into games (id, developerId, gameName, categoryId, platformId) values (1, 12, 'League Of Legends', 4, 10);
 Insert into gamelinks (id, gameId, link) values (1, 1, 'https://www.youtube.com/watch?v=mDYqT0_9VR4');
 Insert into users (id, firstname, lastname, email, password, gender, permission) values (1, 'Test', 'NeveTest', 'sandor@gmail.com', 'admin', 'nő', 1);
 

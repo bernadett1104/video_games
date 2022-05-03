@@ -26,7 +26,7 @@
                             type="button"
                             class="btn btn-dark ms-1 btn-sm"
                             @click="onClickEdit(category.id)">
-                            <i class="bi bi-pencil-fill"></i>
+                            <i class="bi bi-pencil"></i>
                         </button>
 
                         <!-- delete -->
