@@ -29,7 +29,8 @@ const {
     getGamelinksById,
     updateGamelink,
     deleteGamelink,
-    getPlatformName,
+    getAllName,
+    getAllLinks,
     getUsers
 
 } = require("./user.service.js");
@@ -790,8 +791,31 @@ module.exports = {
             });
         });
     },
-    getPlatformName: (req, res) => {
-        getPlatformName((err, results) => {
+    getAllName: (req, res) => {
+        getAllName((err, results) => {
+            if (err) {
+                return res.status(500).json({
+                    success: -1,
+                    message: "Server error",
+                    data: []
+                });
+            }
+            if (results.length == 0) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "No records",
+                    data: results
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Get successfully",
+                data: results
+            });
+        });
+    },
+    getAllLinks: (req, res) => {
+        getAllLinks((err, results) => {
             if (err) {
                 return res.status(500).json({
                     success: -1,

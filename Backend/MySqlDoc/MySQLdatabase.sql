@@ -11,11 +11,6 @@ Select * from games;
 # api/gamelinks
 Select * from gamelinks;
 
-Select d.name, g.gameName, c.name, p.name from games g
-  Inner join platforms p on g.platformId = p.id
-  Inner join categories c on g.categoryId = c.id
-  Inner join developers d on g.developerId = d.id;
-
 # Táblák törlése
 Delete from categories;
 Delete from developers;

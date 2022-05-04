@@ -377,11 +377,12 @@ module.exports = {
             return callBack(null, results);
         });
     },
-    getPlatformName: callBack => {
+    getAllName: callBack => {
         const queryString = `Select d.developerName, g.gameName, c.categoryName, p.platformName from games g
                             Inner join platforms p on g.platformId = p.id
                             Inner join categories c on g.categoryId = c.id
-                            Inner join developers d on g.developerId = d.id`;
+                            Inner join developers d on g.developerId = d.id
+                            Order by d.developerName`;
         const params = [];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
@@ -390,5 +391,18 @@ module.exports = {
             }
             return callBack(null, results);
         });
-    }
+    },
+    getAllLinks: callBack => {
+        const queryString = `Select g.gameName, gl.link from gamelinks gl
+                            Inner join games g on gl.gameId = g.id
+                            Order by g.gameName`;
+        const params = [];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
 };

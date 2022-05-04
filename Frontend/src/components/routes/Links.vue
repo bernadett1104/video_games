@@ -20,7 +20,7 @@
             </thead>
             <tbody>
                 <tr v-for="(vlink, index) in gamelinks" :key="index">
-                    <td>{{ vlink.gameId }}</td>
+                    <td>{{ vlink.gameName }}</td>
                     <td>{{ vlink.link }}</td>
                     <td>
                         <!-- edit -->
@@ -75,7 +75,7 @@
                                     class="form-control"
                                     id="gameId"
                                     placeholder="Név"
-                                    v-model="vlink.gameId"
+                                    v-model="vlink.gameName"
                                     required />
                                 <div class="invalid-feedback">
                                     A játék neve kötelező!
@@ -124,11 +124,11 @@
 class Clink {
     constructor(
         id = null,
-        gameId = null,
+        gameName = null,
         link = null,
     ) {
         this.id = id;
-        this.gameId = gameId;
+        this.gameName = gameName;
         this.link = link;
     }
 }
@@ -161,7 +161,7 @@ export default {
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/gamelinks`;
+            const url = `${this.$loginServer}/api/alllinks`;
             fetch(url, {
                 method: "GET",
                 headers: headers,
