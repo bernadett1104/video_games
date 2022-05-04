@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 <tr v-for="(developer, index) in developers" :key="index">
-                    <td>{{ developer.name }}</td>
+                    <td>{{ developer.developerName }}</td>
                     <td>
                         <!-- edit -->
                         <button
@@ -74,7 +74,7 @@
                                     class="form-control"
                                     id="name"
                                     placeholder="Név"
-                                    v-model="developer.name"
+                                    v-model="developer.developerName"
                                     required />
                                 <div class="invalid-feedback">
                                     A fejlesztő neve kötelező!
@@ -107,10 +107,10 @@
 class Dev {
     constructor(
         id = null,
-        name = null,
+        developerName = null,
     ) {
         this.id = id;
-        this.name = name;
+        this.developerName = developerName;
     }
 }
 

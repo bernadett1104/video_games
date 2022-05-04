@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 <tr v-for="(platform, index) in platforms" :key="index">
-                    <td>{{ platform.name }}</td>
+                    <td>{{ platform.platformName }}</td>
                     <td>
                         <!-- edit -->
                         <button
@@ -74,7 +74,7 @@
                                     class="form-control"
                                     id="name"
                                     placeholder="Név"
-                                    v-model="platform.name"
+                                    v-model="platform.platformName"
                                     required />
                                 <div class="invalid-feedback">
                                     A platform neve kötelező!
@@ -108,10 +108,10 @@
 class Plat {
     constructor(
         id = null,
-        name = null,
+        platformName = null,
     ) {
         this.id = id;
-        this.name = name;
+        this.platformName = platformName;
     }
 }
 

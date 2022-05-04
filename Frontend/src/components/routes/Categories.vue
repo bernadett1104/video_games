@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 <tr v-for="(category, index) in categories" :key="index">
-                    <td>{{ category.name }}</td>
+                    <td>{{ category.categoryName }}</td>
                     <td>
                         <!-- edit -->
                         <button
@@ -74,7 +74,7 @@
                                     class="form-control"
                                     id="name"
                                     placeholder="Név"
-                                    v-model="category.name"
+                                    v-model="category.categoryName"
                                     required />
                                 <div class="invalid-feedback">
                                     A kategória neve kötelező!
@@ -107,10 +107,10 @@
 class Category {
     constructor(
         id = null,
-        name = null,
+        categoryName = null,
     ) {
         this.id = id;
-        this.name = name;
+        this.categoryName = categoryName;
     }
 }
 

@@ -22,10 +22,10 @@
             </thead>
             <tbody>
                 <tr v-for="(game, index) in games" :key="index">
-                    <td>{{ game.developerId }}</td>
+                    <td>{{ game.developerName }}</td>
                     <td>{{ game.gameName }}</td>
-                    <td>{{ game.categoryId }}</td>
-                    <td>{{ game.platformId }}</td>
+                    <td>{{ game.categoryName }}</td>
+                    <td>{{ game.platformName }}</td>
                     <td>
                         <!-- edit -->
                         <button
@@ -160,16 +160,16 @@
 class Game {
     constructor(
         id = null,
-        developerId = null,
+        developerName = null,
         gameName = null,
-        categoryId = null,
-        platformId = null
+        categoryName = null,
+        platformName = null
     ) {
         this.id = id;
-        this.developerId = developerId;
+        this.developerName = developerName;
         this.gameName = gameName;
-        this.categoryId = categoryId;
-        this.platformId = platformId;
+        this.categoryName = categoryName;
+        this.platformName = platformName;
     }
 }
 
@@ -201,7 +201,7 @@ export default {
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/games`;
+            const url = `${this.$loginServer}/api/gamesallname`;
             fetch(url, {
                 method: "GET",
                 headers: headers,

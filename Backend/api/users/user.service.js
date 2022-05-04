@@ -70,9 +70,9 @@ module.exports = {
     },
     createCategory: (data, callBack) => {
         let queryString = `
-            Insert into categories (name) values (?);
+            Insert into categories (categoryName) values (?);
         `
-        let params = [data.name];
+        let params = [data.categoryName];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
                 return callBack(error);
@@ -104,9 +104,9 @@ module.exports = {
         });
     },
     updateCategory: (data, callBack) => {
-        const queryString = `Update categories set name=? Where id= ?`;
+        const queryString = `Update categories set categoryName=? Where id= ?`;
         const params = [
-            data.name,
+            data.categoryName,
             data.id
         ]
         console.log("Update category:", params);
@@ -131,9 +131,9 @@ module.exports = {
     },
     createDeveloper: (data, callBack) => {
         let queryString = `
-            Insert into developers (name) values (?);
+            Insert into developers (developerName) values (?);
         `
-        let params = [data.name];
+        let params = [data.developerName];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
                 return callBack(error);
@@ -165,9 +165,9 @@ module.exports = {
         });
     },
     updateDeveloper: (data, callBack) => {
-        const queryString = `Update developers set name=? Where id= ?`;
+        const queryString = `Update developers set developerName=? Where id= ?`;
         const params = [
-            data.name,
+            data.developerName,
             data.id
         ]
         console.log("Update developer:", params);
@@ -192,9 +192,9 @@ module.exports = {
     },
     createPlatform: (data, callBack) => {
         let queryString = `
-            Insert into platforms (name) values (?);
+            Insert into platforms (platformName) values (?);
         `
-        let params = [data.name];
+        let params = [data.platformName];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
                 return callBack(error);
@@ -226,9 +226,9 @@ module.exports = {
         });
     },
     updatePlatform: (data, callBack) => {
-        const queryString = `Update platforms set name=? Where id= ?`;
+        const queryString = `Update platforms set platformName=? Where id= ?`;
         const params = [
-            data.name,
+            data.platformName,
             data.id
         ]
         console.log("Update platform:", params);
@@ -373,6 +373,20 @@ module.exports = {
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
                 return callBack(error);
+            }
+            return callBack(null, results);
+        });
+    },
+    getPlatformName: callBack => {
+        const queryString = `Select d.developerName, g.gameName, c.categoryName, p.platformName from games g
+                            Inner join platforms p on g.platformId = p.id
+                            Inner join categories c on g.categoryId = c.id
+                            Inner join developers d on g.developerId = d.id`;
+        const params = [];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
             }
             return callBack(null, results);
         });
