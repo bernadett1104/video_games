@@ -24,6 +24,7 @@ const {
     getGamesById,
     updateGame,
     deleteGame,
+    getGamesABC,
     createGamelink,
     getGamelinks,
     getGamelinksById,
@@ -68,6 +69,7 @@ router.get("/games", checkToken, getGames);
 router.get("/games/:id", checkToken, getGamesById);
 router.put("/games/", checkToken, updateGame);
 router.delete("/games/", checkToken, deleteGame);
+router.get("/gamesABC/", checkToken, getGamesABC);
 
 router.get("/gamesallname", checkToken, getAllName);
 router.get("/alllinks", checkToken, getAllLinks);

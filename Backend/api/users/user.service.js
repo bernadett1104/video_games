@@ -275,6 +275,18 @@ module.exports = {
             return callBack(null, results);
         });
     },
+    getGamesABC: callBack => {
+        const queryString = `Select gameName, id from games
+        Order by gameName`;
+        const params = [];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
     getGamesById: (id, callBack) => {
         const queryString = `Select * from games Where id= ?`;
         const params = [id];
@@ -393,9 +405,9 @@ module.exports = {
         });
     },
     getAllLinks: callBack => {
-        const queryString = `Select g.gameName, gl.link from gamelinks gl
+        const queryString = `Select gl.id id, gl.gameId gameId, g.gameName, gl.link from gamelinks gl
                             Inner join games g on gl.gameId = g.id
-                            Order by g.gameName`;
+                            Order by g.gameName;`;
         const params = [];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {

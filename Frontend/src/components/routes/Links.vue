@@ -27,7 +27,7 @@
                         <button
                             type="button"
                             class="btn btn-dark ms-1 btn-sm"
-                            @click="onClickEdit(vlink.id)">
+                            @click="onClickEdit(vlink)">
                             <i class="bi bi-pencil"></i>
                         </button>
 
@@ -70,9 +70,13 @@
                             <div class="mb-3 col-12">
                                 <label for="text" class="col-sm-3 col-form-label">Játék neve:</label>
                                 <div>
-                                    <select class="form-select" v-model="vlink.gameName" required>
-                                        <option>
-                                            {{car.gameName}}
+                                    <select class="form-select" v-model="gameId" required>
+                                        <option
+                                        v-for="(game, index) in gamesABC"
+                                        :key="index"
+                                        :value="game.id"
+                                        >
+                                            {{game.gameName}}
                                         </option>
                                     </select>
                                 </div>
@@ -139,12 +143,16 @@ export default {
             state: "view",
             stateTitle: null,
             vlink: new Clink(),
+            clink: new Clink(),
+            gamesABC: [],
+            gameId: null, 
             modal: null,
             form: null,
         };
     },
     created() {
         this.getGamelinks();
+        this.getGamesABC();
     },
     mounted() {
         this.modal = new bootstrap.Modal(document.getElementById("modal"), {
@@ -152,7 +160,33 @@ export default {
         });
         this.form = document.querySelector(".needs-validation");
     },
+    computed: {
+        linkgames() {
+            let vm = this;
+            return this.gamelink.filter(linkgames => linkgames.id == vm.gameId)[0];
+        }
+    },
     methods: {
+        getGamesABC(){
+            let headers = new Headers();
+
+            headers.append("Content-Type", "application/json");
+            headers.append("Authorization", "Bearer " + this.$root.$data.token);
+            const url = `${this.$loginServer}/api/gamesABC`;
+            fetch(url, {
+                method: "GET",
+                headers: headers,
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Success:", data.data);
+                    this.gamesABC = data.data;
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    this.gamesABC = [];
+                });
+        },
         getGamelinks() {
             let headers = new Headers();
 
@@ -266,10 +300,13 @@ export default {
             this.vlink = new Clink();
             this.modal.show();
         },
-        onClickEdit(id) {
+        onClickEdit(vlink) {
+            console.log(vlink);
             this.state = "edit";
             this.stateTitle = "Adatmódosítás";
-            this.getGamelinksById(id);
+            // this.getGamelinksById(vlink.id);
+            this.vlink = vlink;
+            this.gameId = vlink.gameId;
             this.modal.show();
         },
         onClickDelete(id) {
@@ -294,7 +331,8 @@ export default {
             } else {
                 return;
             }
-        }
+        },
+
     }
 }
 </script>

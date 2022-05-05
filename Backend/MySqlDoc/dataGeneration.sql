@@ -221,3 +221,14 @@ Insert into videogames.gamelinks
     (54, 33, 'https://www.youtube.com/watch?v=bBd-SVh_aLA'),
     (55, 34, 'https://www.youtube.com/watch?v=II2gFPwm_EI'),
     (56, 35, 'https://www.youtube.com/watch?v=2z7k6id-ipE');
+
+## api/gamesABC
+Select gameName, id from games
+Order by gameName;
+
+## api/alllinks
+Select gl.id id, gl.gameId gameId, g.gameName, gl.link from gamelinks gl
+  Inner join games g on gl.gameId = g.id
+  Order by g.gameName;
+
+select * from gamelinks;
