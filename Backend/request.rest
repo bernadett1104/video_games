@@ -61,7 +61,7 @@ post http://localhost:3000/api/categories
 Content-Type: application/json
 
 {
-    "name": "multiplayer"
+    "categoryName": "multiplayer"
 }
 
 ### Categories
@@ -192,10 +192,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiO
 get http://localhost:3000/api/games/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsIm5hbWUiOiJOYWd5IFPDoW5kb3IiLCJlbWFpbCI6InNhbmRvckBnbWFpbC5jb20iLCJwZXJtaXNzaW9uIjoxfSwiaWF0IjoxNjQ4NzI0NTcxLCJleHAiOjE2NDg3MjgxNzF9.twd3PxUOjyi8eIoLN_d8hM0BrS_Xmst7pZIBxSflEeQ
 
-### Összes adat
-get http://localhost:3000/api/gamesallname
-
-
 ### Game edit
 put http://localhost:3000/api/games
 Content-Type: application/json
@@ -208,8 +204,6 @@ Content-Type: application/json
     "id": 1
 }
 
-
-
 ### Delete game
 delete http://localhost:3000/api/games
 Content-Type: application/json
@@ -219,7 +213,11 @@ Content-Type: application/json
 }
 
 
+### Összes adat
+get http://localhost:3000/api/gamesallname
 
+### Összes link
+get http://localhost:3000/api/gamesallname
 
 
 # GameLinks

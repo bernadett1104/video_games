@@ -66,20 +66,17 @@
 
                     <div class="modal-body">
                         <form class="row g-3 needs-validation" novalidate>
+
                             <div class="mb-3 col-12">
-                                <label for="gameId" class="form-label"
-                                    >Játék neve:</label
-                                >
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="gameId"
-                                    placeholder="Név"
-                                    v-model="vlink.gameName"
-                                    required />
-                                <div class="invalid-feedback">
-                                    A játék neve kötelező!
+                                <label for="text" class="col-sm-3 col-form-label">Játék neve:</label>
+                                <div>
+                                    <select class="form-select" v-model="vlink.gameName" required>
+                                        <option>
+                                            {{car.gameName}}
+                                        </option>
+                                    </select>
                                 </div>
+                                <div class="invalid-feedback">Játék megadása kötelező!</div>
                             </div>
 
                             <div class="mb-3 col-12">

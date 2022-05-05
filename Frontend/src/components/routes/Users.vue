@@ -1,6 +1,6 @@
 <template>
   <div class="my-border">
-      <h1>Users</h1>
+      <h1>Felhasználók</h1>
       <ul>
             <li v-for="(user, index) in users" :key="index">
                 {{user.email}}

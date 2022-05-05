@@ -37,14 +37,14 @@
             </div>
 
             <div class="row mb-3 center">
-                <label for="password" class="col-sm-1 col-form-label">Neme:</label>
+                <label for="text" class="col-sm-1 col-form-label">Neme:</label>
                 <div class="col-sm-3">
                     <select class="form-select" v-model="registrationData.gender" required>
-                    <option selected disabled value="">Válasz</option>
-                    <option>Nő</option>
-                    <option>Férfi</option>
-                    <option>Egyéb</option>
-                </select>
+                        <option selected disabled value="">Válasz</option>
+                        <option>Nő</option>
+                        <option>Férfi</option>
+                        <option>Egyéb</option>
+                    </select>
                 </div>
                 <div class="invalid-feedback">Nem megadása kötelező!</div>
             </div>

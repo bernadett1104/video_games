@@ -6,7 +6,7 @@ Create database videogames
 # Categories létrehozás
 Create table videogames.categories (
   id int(11) not null auto_increment,
-  name varchar(50) not null,
+  categoryName varchar(50) not null,
   Primary key (id)
 )
 Engine = innodb,
@@ -16,7 +16,7 @@ Collate utf8_hungarian_ci;
 # Developers létrehozás
 Create table videogames.developers (
   id int(11) not null auto_increment,
-  name varchar(255) not null,
+  developerName varchar(255) not null,
   Primary key (id)
 )
 Engine = innodb,
@@ -26,7 +26,7 @@ Collate utf8_hungarian_ci;
 # Platform létrehozás
 Create table videogames.platforms (
   id int(11) null auto_increment,
-  name varchar(50) not null,
+  platformName varchar(50) not null,
   Primary key (id)
 )
 Engine = innodb,
@@ -65,7 +65,7 @@ Create table videogames.users (
   email varchar(50) not null,
   password varchar(255) not null,
   gender varchar(20) not null,
-  permission int(11),,
+  permission int(11),
   Primary key (id)
 )
 Engine = innodb,
@@ -93,7 +93,7 @@ Alter table videogames.gamelinks
 # Táblákhoz adatgenerálás
 # Kategória adatgenerálás
 Insert into videogames.categories 
-    (id, name) 
+    (id, categoryName) 
   Values 
     (1, 'multiplayer'),
     (2, 'singleplayer'),
@@ -101,7 +101,7 @@ Insert into videogames.categories
 
 # Developers adatgenerálás
 Insert into videogames.developers 
-    (id, name) 
+    (id, developerName) 
   Values 
     (1, 'Riot Games'),
     (2, 'Psyonix'),
@@ -114,7 +114,7 @@ Insert into videogames.developers
 
 # Platform adatgenerálás
 Insert into videogames.platforms 
-    (id, name) 
+    (id, platformName) 
   Values 
     (1, 'PC'),
     (2, 'PS4'),
@@ -221,10 +221,3 @@ Insert into videogames.gamelinks
     (54, 33, 'https://www.youtube.com/watch?v=bBd-SVh_aLA'),
     (55, 34, 'https://www.youtube.com/watch?v=II2gFPwm_EI'),
     (56, 35, 'https://www.youtube.com/watch?v=2z7k6id-ipE');
-
-# Users adatgenerálás
-Insert into videogames.users 
-    (id, firstname, lastname, email, password, gender, permission) 
-  Values 
-    (1, 'Sándor', 'Nagy', 'sandor@gmail.com', 'admin', 'férfi', 1),
-    (2, 'Lili', 'Békefi', 'lili@gmail.com', 'nő' ,'user', 2);
