@@ -248,9 +248,9 @@ put http://localhost:3000/api/gamelinks
 Content-Type: application/json
 
 {
-    "gameId": 1,
-    "link": "https://www.youtube.com/watch?v=mDYqT0_9VR4 _updated",
-    "id": 1
+    "gameId": 12,
+    "link": "https://www.youtube.com/watch?v=ssrNcwxALS4",
+    "id": 19
 }
 
 ### Delete gamelink

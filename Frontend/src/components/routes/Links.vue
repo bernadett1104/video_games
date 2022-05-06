@@ -19,15 +19,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(vlink, index) in gamelinks" :key="index">
-                    <td>{{ vlink.gameName }}</td>
-                    <td>{{ vlink.link }}</td>
+                <tr v-for="(gamelink, index) in gamelinks" :key="index">
+                    <td>{{ gamelink.gameName }}</td>
+                    <td>
+                        <a :href="gamelink.link" target="_blank">
+                        {{ gamelink.link }} </a>
+                    </td>
                     <td>
                         <!-- edit -->
                         <button
                             type="button"
                             class="btn btn-dark ms-1 btn-sm"
-                            @click="onClickEdit(vlink)">
+                            @click="onClickEdit(gamelink)">
                             <i class="bi bi-pencil"></i>
                         </button>
 
@@ -35,7 +38,7 @@
                         <button
                             type="button"
                             class="btn btn-danger ms-1 btn-sm"
-                            @click="onClickDelete(vlink.id)">
+                            @click="onClickDelete(gamelink.id)">
                             <i class="bi bi-trash"></i>
                         </button>
                     </td>
@@ -70,7 +73,7 @@
                             <div class="mb-3 col-12">
                                 <label for="text" class="col-sm-3 col-form-label">Játék neve:</label>
                                 <div>
-                                    <select class="form-select" v-model="gameId" required>
+                                    <select class="form-select" v-model="gamelink.gameId" required>
                                         <option
                                         v-for="(game, index) in gamesABC"
                                         :key="index"
@@ -92,7 +95,7 @@
                                     class="form-control"
                                     id="link"
                                     placeholder="Név"
-                                    v-model="vlink.link"
+                                    v-model="gamelink.link"
                                     required />
                                 <div class="invalid-feedback">
                                     Link megadása kötelező!
@@ -122,14 +125,14 @@
 </template>
 
 <script>
-class Clink {
+class GameLink {
     constructor(
         id = null,
-        gameName = null,
+        gameId = null,
         link = null,
     ) {
         this.id = id;
-        this.gameName = gameName;
+        this.gameId = gameId;
         this.link = link;
     }
 }
@@ -142,8 +145,8 @@ export default {
             gamelinks: [],
             state: "view",
             stateTitle: null,
-            vlink: new Clink(),
-            clink: new Clink(),
+            // game: null,
+            gamelink: new GameLink(),
             gamesABC: [],
             gameId: null, 
             modal: null,
@@ -179,7 +182,7 @@ export default {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log("Success:", data.data);
+                    // console.log("Success:", data.data);
                     this.gamesABC = data.data;
                 })
                 .catch((error) => {
@@ -199,7 +202,7 @@ export default {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log("Success:", data.data);
+                    // console.log("Success:", data.data);
                     this.gamelinks = data.data;
                 })
                 .catch((error) => {
@@ -213,19 +216,19 @@ export default {
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
             const url = `${this.$loginServer}/api/gamelinks/${id}`;
-            console.log(url);
+            // console.log(url);
             fetch(url, {
                 method: "GET",
                 headers: headers,
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log("Success:", data.data);
-                    this.vlink = data.data[0];
+                    // console.log("Success:", data.data);
+                    this.gamelink = data.data[0];
                 })
                 .catch((error) => {
                     console.error("Error:", error);
-                    this.vlink = [];
+                    this.gamelink = new GameLink();
                 });
         },
         updateGamelink() {
@@ -234,15 +237,22 @@ export default {
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
             const url = `${this.$loginServer}/api/gamelinks/`;
-            let data = this.vlink;
+            // let data = this.gamelink;
+            let data = {
+                id: this.gamelink.id,
+                gameId: this.gamelink.gameId,
+                link: this.gamelink.link
+            };
+            console.log(data);
             fetch(url, {
                 method: "PUT",
                 headers: headers,
                 body: JSON.stringify(data),
             })
                 .then((response) => response.json())
-                .then((data) => {
-                    console.log("Success:", data.data);
+                .then(() => {
+                    // console.log("Success:", data.data);
+                    
                     this.getGamelinks();
                 })
                 .catch((error) => {
@@ -264,8 +274,8 @@ export default {
                 body: JSON.stringify(data),
             })
                 .then((response) => response.json())
-                .then((data) => {
-                    console.log("Success:", data.data);
+                .then(() => {
+                    // console.log("Success:", data.data);
                     this.getGamelinks();
                 })
                 .catch((error) => {
@@ -278,7 +288,7 @@ export default {
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
             const url = `${this.$loginServer}/api/gamelinks`;
-            let data = this.vlink;
+            let data = this.gamelink;
             delete data.id;
             fetch(url, {
                 method: "POST",
@@ -286,8 +296,8 @@ export default {
                 body: JSON.stringify(data),
             })
                 .then((response) => response.json())
-                .then((data) => {
-                    console.log("Success:", data.data);
+                .then(() => {
+                    // console.log("Success:", data.data);
                     this.getGamelinks();
                 })
                 .catch((error) => {
@@ -297,16 +307,16 @@ export default {
         onClickNew() {
             this.state = "new";
             this.stateTitle = "Új link";
-            this.vlink = new Clink();
+            this.gamelink = new GameLink();
             this.modal.show();
         },
-        onClickEdit(vlink) {
-            console.log(vlink);
+        onClickEdit(gamelink) {
+            // console.log(gamelink);
             this.state = "edit";
             this.stateTitle = "Adatmódosítás";
-            // this.getGamelinksById(vlink.id);
-            this.vlink = vlink;
-            this.gameId = vlink.gameId;
+            // this.getGamelinksById(gamelink.id);
+            this.gamelink = gamelink;
+            this.gameId = gamelink.gameId;
             this.modal.show();
         },
         onClickDelete(id) {
