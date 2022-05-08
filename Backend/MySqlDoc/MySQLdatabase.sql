@@ -11,6 +11,10 @@ Select * from games;
 # api/gamelinks
 Select * from gamelinks;
 
+## api/gamesABC
+Select gameName, id from games
+  Order by gameName;
+
 # Táblák törlése
 Delete from categories;
 Delete from developers;
