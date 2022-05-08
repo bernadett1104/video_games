@@ -7,16 +7,19 @@ const {
     createCategory,
     getCategories,
     getCategoriesById,
+    getCategoriesABC,
     updateCategory,
     deleteCategory,
     createDeveloper,
     getDevelopers,
     getDevelopersById,
+    getDevelopersABC,
     updateDeveloper,
     deleteDeveloper,
     createPlatform,
     getPlatforms,
     getPlatformsById,
+    getplatformsABC,
     updatePlatform,
     deletePlatform,
     createGame,
@@ -251,6 +254,29 @@ module.exports = {
             });
         });
     },
+    getCategoriesABC: (req, res) => {
+        getCategoriesABC((err, results) => {
+            if (err) {
+                return res.status(500).json({
+                    success: -1,
+                    message: "Server error",
+                    data: []
+                });
+            }
+            if (results.length == 0) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "No records",
+                    data: results
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Get successfully",
+                data: results
+            });
+        });
+    },
     updateCategory: (req, res) => {
         const body = req.body;
         updateCategory(body, (err, results) => {
@@ -374,6 +400,29 @@ module.exports = {
             });
         });
     },
+    getDevelopersABC: (req, res) => {
+        getDevelopersABC((err, results) => {
+            if (err) {
+                return res.status(500).json({
+                    success: -1,
+                    message: "Server error",
+                    data: []
+                });
+            }
+            if (results.length == 0) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "No records",
+                    data: results
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Get successfully",
+                data: results
+            });
+        });
+    },
     updateDeveloper: (req, res) => {
         const body = req.body;
         updateDeveloper(body, (err, results) => {
@@ -493,6 +542,29 @@ module.exports = {
             return res.status(200).json({
                 success: 1,
                 message: "Record found!",
+                data: results
+            });
+        });
+    },
+    getplatformsABC: (req, res) => {
+        getplatformsABC((err, results) => {
+            if (err) {
+                return res.status(500).json({
+                    success: -1,
+                    message: "Server error",
+                    data: []
+                });
+            }
+            if (results.length == 0) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "No records",
+                    data: results
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Get successfully",
                 data: results
             });
         });

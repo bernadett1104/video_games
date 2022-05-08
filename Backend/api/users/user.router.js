@@ -7,16 +7,19 @@ const {
     createCategory,
     getCategories,
     getCategoriesById,
+    getCategoriesABC,
     updateCategory,
     deleteCategory,
     createDeveloper,
     getDevelopers,
+    getDevelopersABC,
     getDevelopersById,
     updateDeveloper,
     deleteDeveloper,
     createPlatform,
     getPlatforms,
     getPlatformsById,
+    getplatformsABC,
     updatePlatform,
     deletePlatform,
     createGame,
@@ -51,18 +54,21 @@ router.get("/categories", checkToken, getCategories);
 router.get("/categories/:id", checkToken, getCategoriesById);
 router.put("/categories/", checkToken, updateCategory);
 router.delete("/categories/", checkToken, deleteCategory);
+router.get("/categoriesABC/", checkToken, getCategoriesABC);
 
 router.post("/developers", checkToken, createDeveloper);
 router.get("/developers", checkToken, getDevelopers);
 router.get("/developers/:id", checkToken, getDevelopersById);
 router.put("/developers/", checkToken, updateDeveloper);
 router.delete("/developers/", checkToken, deleteDeveloper);
+router.get("/developersABC/", checkToken, getDevelopersABC);
 
 router.post("/platforms", checkToken, createPlatform);
 router.get("/platforms", checkToken, getPlatforms);
 router.get("/platforms/:id", checkToken, getPlatformsById);
 router.put("/platforms/", checkToken, updatePlatform);
 router.delete("/platforms/", checkToken, deletePlatform);
+router.get("/platformsABC/", checkToken, getplatformsABC);
 
 router.post("/games", checkToken, createGame);
 router.get("/games", checkToken, getGames);

@@ -143,11 +143,10 @@ export default {
     data() {
         return {
             gamelinks: [],
+            gamesABC: [],
+            gamelink: new GameLink(),
             state: "view",
             stateTitle: null,
-            // game: null,
-            gamelink: new GameLink(),
-            gamesABC: [],
             gameId: null, 
             modal: null,
             form: null,
@@ -163,12 +162,6 @@ export default {
         });
         this.form = document.querySelector(".needs-validation");
     },
-    computed: {
-        linkgames() {
-            let vm = this;
-            return this.gamelink.filter(linkgames => linkgames.id == vm.gameId)[0];
-        }
-    },
     methods: {
         getGamesABC(){
             let headers = new Headers();
@@ -182,7 +175,6 @@ export default {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    // console.log("Success:", data.data);
                     this.gamesABC = data.data;
                 })
                 .catch((error) => {
@@ -202,7 +194,6 @@ export default {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    // console.log("Success:", data.data);
                     this.gamelinks = data.data;
                 })
                 .catch((error) => {
@@ -216,14 +207,12 @@ export default {
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
             const url = `${this.$loginServer}/api/gamelinks/${id}`;
-            // console.log(url);
             fetch(url, {
                 method: "GET",
                 headers: headers,
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    // console.log("Success:", data.data);
                     this.gamelink = data.data[0];
                 })
                 .catch((error) => {
@@ -237,7 +226,6 @@ export default {
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
             const url = `${this.$loginServer}/api/gamelinks/`;
-            // let data = this.gamelink;
             let data = {
                 id: this.gamelink.id,
                 gameId: this.gamelink.gameId,
@@ -251,8 +239,6 @@ export default {
             })
                 .then((response) => response.json())
                 .then(() => {
-                    // console.log("Success:", data.data);
-                    
                     this.getGamelinks();
                 })
                 .catch((error) => {
@@ -275,7 +261,6 @@ export default {
             })
                 .then((response) => response.json())
                 .then(() => {
-                    // console.log("Success:", data.data);
                     this.getGamelinks();
                 })
                 .catch((error) => {
@@ -297,7 +282,6 @@ export default {
             })
                 .then((response) => response.json())
                 .then(() => {
-                    // console.log("Success:", data.data);
                     this.getGamelinks();
                 })
                 .catch((error) => {
@@ -311,10 +295,8 @@ export default {
             this.modal.show();
         },
         onClickEdit(gamelink) {
-            // console.log(gamelink);
             this.state = "edit";
             this.stateTitle = "Adatmódosítás";
-            // this.getGamelinksById(gamelink.id);
             this.gamelink = gamelink;
             this.gameId = gamelink.gameId;
             this.modal.show();

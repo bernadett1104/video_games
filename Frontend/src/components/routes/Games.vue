@@ -31,7 +31,7 @@
                         <button
                             type="button"
                             class="btn btn-dark ms-1 btn-sm"
-                            @click="onClickEdit(game.id)">
+                            @click="onClickEdit(game)">
                             <i class="bi bi-pencil"></i>
                         </button>
 
@@ -70,20 +70,21 @@
 
                     <div class="modal-body">
                         <form class="row g-3 needs-validation" novalidate>
+
                             <div class="mb-3 col-12">
-                                <label for="developerId" class="form-label"
-                                    >Fejlesztő neve:</label
-                                >
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    id="developerId"
-                                    placeholder="Fejlesztő neve"
-                                    v-model="game.developerId"
-                                    required />
-                                <div class="invalid-feedback">
-                                    A fejlesztő neve kötelező!
+                                <label for="text" class="col-form-label">Fejlesztő neve:</label>
+                                <div>
+                                    <select class="form-select" v-model="game.developerId" required>
+                                        <option
+                                        v-for="(developertoadc, index) in developersABC"
+                                        :key="index"
+                                        :value="developertoadc.id"
+                                        >
+                                            {{developertoadc.developerName}}
+                                        </option>
+                                    </select>
                                 </div>
+                                <div class="invalid-feedback">Fejlesztő megadása kötelező!</div>
                             </div>
 
                             <div class="mb-3 col-12">
@@ -103,35 +104,35 @@
                             </div>
 
                             <div class="mb-3 col-12">
-                                <label for="categoryId" class="form-label"
-                                    >Categoria neve:</label
-                                >
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    id="categoryId"
-                                    placeholder="Név"
-                                    v-model="game.categoryId"
-                                    required />
-                                <div class="invalid-feedback">
-                                    A categoria megadása kötelező!
+                                <label for="text" class=" col-form-label">Kategória neve:</label>
+                                <div>
+                                    <select class="form-select" v-model="game.categoryId" required>
+                                        <option
+                                        v-for="(categorytoabc, index) in categoryABC"
+                                        :key="index"
+                                        :value="categorytoabc.id"
+                                        >
+                                            {{categorytoabc.categoryName}}
+                                        </option>
+                                    </select>
                                 </div>
+                                <div class="invalid-feedback">Kategória megadása kötelező!</div>
                             </div>
 
                             <div class="mb-3 col-12">
-                                <label for="platformId" class="form-label"
-                                    >Platform neve:</label
-                                >
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    id="platformId"
-                                    placeholder="Név"
-                                    v-model="game.platformId"
-                                    required />
-                                <div class="invalid-feedback">
-                                    A platform megadása kötelező!
+                                <label for="text" class="col-form-label">Platform neve:</label>
+                                <div>
+                                    <select class="form-select" v-model="game.platformId" required>
+                                        <option
+                                        v-for="(platformtoabc, index) in platformABC"
+                                        :key="index"
+                                        :value="platformtoabc.id"
+                                        >
+                                            {{platformtoabc.platformName}}
+                                        </option>
+                                    </select>
                                 </div>
+                                <div class="invalid-feedback">Platform megadása kötelező!</div>
                             </div>
                         </form>
                     </div>
@@ -160,16 +161,16 @@
 class Game {
     constructor(
         id = null,
-        developerName = null,
+        developerId = null,
         gameName = null,
-        categoryName = null,
-        platformName = null
+        categoryId = null,
+        platformId = null
     ) {
         this.id = id;
-        this.developerName = developerName;
+        this.developerId = developerId;
         this.gameName = gameName;
-        this.categoryName = categoryName;
-        this.platformName = platformName;
+        this.categoryId = categoryId;
+        this.platformId = platformId;
     }
 }
 
@@ -179,6 +180,12 @@ export default {
     data() {
         return {
             games: [],
+            developersABC: [],
+            categoryABC: [],
+            platformABC: [],
+            developerId: null,
+            categoryId: null,
+            platformId: null,
             state: "view",
             stateTitle: null,
             game: new Game(),
@@ -188,6 +195,9 @@ export default {
     },
     created() {
         this.getGames();
+        this.getDevelopersABC();
+        this.getCategoriesABC();
+        this.getplatformsABC();
     },
     mounted() {
         this.modal = new bootstrap.Modal(document.getElementById("modal"), {
@@ -196,6 +206,64 @@ export default {
         this.form = document.querySelector(".needs-validation");
     },
     methods: {
+        getDevelopersABC(){
+            let headers = new Headers();
+
+            headers.append("Content-Type", "application/json");
+            headers.append("Authorization", "Bearer " + this.$root.$data.token);
+            const url = `${this.$loginServer}/api/developersABC`;
+            fetch(url, {
+                method: "GET",
+                headers: headers,
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    // console.log("Success:", data.data);
+                    this.developersABC = data.data;
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    this.developersABC = [];
+                });
+        },
+        getCategoriesABC(){
+            let headers = new Headers();
+
+            headers.append("Content-Type", "application/json");
+            headers.append("Authorization", "Bearer " + this.$root.$data.token);
+            const url = `${this.$loginServer}/api/categoriesABC`;
+            fetch(url, {
+                method: "GET",
+                headers: headers,
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    this.categoryABC = data.data;
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    this.categoryABC = [];
+                });
+        },
+        getplatformsABC(){
+            let headers = new Headers();
+
+            headers.append("Content-Type", "application/json");
+            headers.append("Authorization", "Bearer " + this.$root.$data.token);
+            const url = `${this.$loginServer}/api/platformsABC`;
+            fetch(url, {
+                method: "GET",
+                headers: headers,
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    this.platformABC = data.data;
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    this.platformABC = [];
+                });
+        },
         getGames() {
             let headers = new Headers();
 
@@ -208,7 +276,6 @@ export default {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log("Success:", data.data);
                     this.games = data.data;
                 })
                 .catch((error) => {
@@ -222,19 +289,17 @@ export default {
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
             const url = `${this.$loginServer}/api/games/${id}`;
-            console.log(url);
             fetch(url, {
                 method: "GET",
                 headers: headers,
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log("Success:", data.data);
                     this.game = data.data[0];
                 })
                 .catch((error) => {
                     console.error("Error:", error);
-                    this.game = [];
+                    this.game = new Game();
                 });
         },
         updateGame() {
@@ -243,15 +308,20 @@ export default {
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
             const url = `${this.$loginServer}/api/games/`;
-            let data = this.game;
+            let data = {
+                id: this.game.id,
+                developerId: this.game.developerId,
+                gameName: this.game.gameName,
+                categoryId: this.game.categoryId,
+                platformId: this.game.platformId
+            }
             fetch(url, {
                 method: "PUT",
                 headers: headers,
                 body: JSON.stringify(data),
             })
                 .then((response) => response.json())
-                .then((data) => {
-                    console.log("Success:", data.data);
+                .then(() => {
                     this.getGames();
                 })
                 .catch((error) => {
@@ -273,8 +343,7 @@ export default {
                 body: JSON.stringify(data),
             })
                 .then((response) => response.json())
-                .then((data) => {
-                    console.log("Success:", data.data);
+                .then(() => {
                     this.getGames();
                 })
                 .catch((error) => {
@@ -295,8 +364,7 @@ export default {
                 body: JSON.stringify(data),
             })
                 .then((response) => response.json())
-                .then((data) => {
-                    console.log("Success:", data.data);
+                .then(() => {
                     this.getGames();
                 })
                 .catch((error) => {
@@ -309,10 +377,14 @@ export default {
             this.game = new Game();
             this.modal.show();
         },
-        onClickEdit(id) {
+        onClickEdit(game) {
             this.state = "edit";
             this.stateTitle = "Adatmódosítás";
-            this.getGamesById(id);
+            this.game = game;
+            this.developerId = game.developerId;
+            this.categoryId = game.categoryId;
+            this.platformId = game.platformId;
+            this.gameName = game.gameName;
             this.modal.show();
         },
         onClickDelete(id) {

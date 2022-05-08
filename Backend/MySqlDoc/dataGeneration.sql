@@ -97,7 +97,7 @@ Insert into videogames.categories
   Values 
     (1, 'multiplayer'),
     (2, 'singleplayer'),
-    (3, 'both');
+    (3, 'both (multiplayer and singleplayer)');
 
 # Developers adatgenerálás
 Insert into videogames.developers 

@@ -14,6 +14,15 @@ Select * from gamelinks;
 ## api/gamesABC
 Select gameName, id from games
   Order by gameName;
+## api/developersABC
+Select developerName, id from developers
+  Order by developerName;
+## api/categoriesABC
+Select categoryName, id from categories
+  Order by categoryName;
+## api/platformsABC
+Select platformName, id from platforms
+  Order by platformName;
 
 # Táblák törlése
 Delete from categories;
@@ -48,3 +57,17 @@ Delete from platforms where id = 1;
 Delete from games where id = 1;
 Delete from gamelinks where id = 1;
 Delete from users where id = 2;
+
+Select gl.id id, gl.gameId gameId, g.gameName, gl.link from gamelinks gl
+  Inner join games g on gl.gameId = g.id
+  Order by g.gameName;
+
+Select gl.id id, gl.gameId gameId, g.gameName, gl.link from gamelinks gl
+  Inner join games g on gl.gameId = g.id
+  Order by g.gameName;
+
+Select g.id id, d.id developerid, d.developerName, g.gameName, c.id categoryid, c.categoryName, p.id platformid, p.platformName from games g
+  Inner join platforms p on g.platformId = p.id
+  Inner join categories c on g.categoryId = c.id
+  Inner join developers d on g.developerId = d.id
+  Order by d.developerName;

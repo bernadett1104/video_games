@@ -103,6 +103,18 @@ module.exports = {
             return callBack(null, results);
         });
     },
+    getCategoriesABC: callBack => {
+        const queryString = `Select categoryName, id from categories
+                        Order by categoryName`;
+        const params = [];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
     updateCategory: (data, callBack) => {
         const queryString = `Update categories set categoryName=? Where id= ?`;
         const params = [
@@ -164,6 +176,18 @@ module.exports = {
             return callBack(null, results);
         });
     },
+    getDevelopersABC: callBack => {
+        const queryString = `Select developerName, id from developers
+        Order by developerName`;
+        const params = [];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
     updateDeveloper: (data, callBack) => {
         const queryString = `Update developers set developerName=? Where id= ?`;
         const params = [
@@ -217,6 +241,18 @@ module.exports = {
     getPlatformsById: (id, callBack) => {
         const queryString = `Select * from platforms Where id= ?`;
         const params = [id];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
+    getplatformsABC: callBack => {
+        const queryString = `Select platformName, id from platforms
+                        Order by platformName`;
+        const params = [];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
                 return callBack(error);
@@ -390,11 +426,11 @@ module.exports = {
         });
     },
     getAllName: callBack => {
-        const queryString = `Select d.developerName, g.gameName, c.categoryName, p.platformName from games g
-                            Inner join platforms p on g.platformId = p.id
-                            Inner join categories c on g.categoryId = c.id
-                            Inner join developers d on g.developerId = d.id
-                            Order by d.developerName`;
+        const queryString = `Select g.id id, d.id developerid, d.developerName, g.gameName, c.id categoryid, c.categoryName, p.id platformid, p.platformName from games g
+                                Inner join platforms p on g.platformId = p.id
+                                Inner join categories c on g.categoryId = c.id
+                                Inner join developers d on g.developerId = d.id
+                                Order by d.developerName`;
         const params = [];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
@@ -407,7 +443,7 @@ module.exports = {
     getAllLinks: callBack => {
         const queryString = `Select gl.id id, gl.gameId gameId, g.gameName, gl.link from gamelinks gl
                             Inner join games g on gl.gameId = g.id
-                            Order by g.gameName;`;
+                            Order by g.gameName`;
         const params = [];
         pool.query(queryString, params, (error, results, fields) => {
             if (error) {
