@@ -1,51 +1,58 @@
 <template>
     <div class="my-border">
         <h1>Linkek</h1>
+        <div class="row">
+            <div class="col-12 col-md-7 order-2 order-md-1">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Játék</th>
+                        <th scope="col">Link</th>
+                        <th scope="col">
+                            <!-- new -->
+                            <button
+                                type="button"
+                                class="btn btn-success ms-1 btn-sm"
+                                @click="onClickNew()">
+                                <i class="bi bi-plus-lg"></i>
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr @click="onClickGameName(gamelink.link)" v-for="(gamelink, index) in gamelinks" :key="index">
+                        <td>{{ gamelink.gameName }}</td>
+                        <td>
+                            <a :href="gamelink.link" target="_blank">
+                            {{ gamelink.link }} </a>
+                        </td>
+                        <td>
+                            <!-- edit -->
+                            <button
+                                type="button"
+                                class="btn btn-dark ms-1 btn-sm"
+                                @click="onClickEdit(gamelink)">
+                                <i class="bi bi-pencil"></i>
+                            </button>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Játék</th>
-                    <th scope="col">Link</th>
-                    <th scope="col">
-                        <!-- new -->
-                        <button
-                            type="button"
-                            class="btn btn-success ms-1 btn-sm"
-                            @click="onClickNew()">
-                            <i class="bi bi-plus-lg"></i>
-                        </button>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(gamelink, index) in gamelinks" :key="index">
-                    <td>{{ gamelink.gameName }}</td>
-                    <td>
-                        <a :href="gamelink.link" target="_blank">
-                        {{ gamelink.link }} </a>
-                    </td>
-                    <td>
-                        <!-- edit -->
-                        <button
-                            type="button"
-                            class="btn btn-dark ms-1 btn-sm"
-                            @click="onClickEdit(gamelink)">
-                            <i class="bi bi-pencil"></i>
-                        </button>
+                            <!-- delete -->
+                            <button
+                                type="button"
+                                class="btn btn-danger ms-1 btn-sm"
+                                @click="onClickDelete(gamelink.id)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="col-12 col-md-5 pe-5 order-1 order-md-2">
+                <div v-html="embed" class="sticky-top">
 
-                        <!-- delete -->
-                        <button
-                            type="button"
-                            class="btn btn-danger ms-1 btn-sm"
-                            @click="onClickDelete(gamelink.id)">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
+                </div>
+            </div>
+        </div>
         <!-- Modal -->
         <div
             class="modal fade"
@@ -148,6 +155,7 @@ export default {
             state: "view",
             stateTitle: null,
             gameId: null, 
+            embed: null,
             modal: null,
             form: null,
         };
@@ -309,6 +317,21 @@ export default {
         onClickCancel() {
             this.state = "view";
             this.modal.hide();
+        },
+        onClickGameName(link){
+            //src="https://www.youtube.com/embed/-pUhraVG7Ow" 
+            link = link.split("=")[1];
+            this.embed = `<iframe width="100%" height="315"
+                src="https://www.youtube.com/embed/${link}"
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; 
+                autoplay; 
+                clipboard-write; 
+                encrypted-media; 
+                gyroscope; 
+                picture-in-picture" allowfullscreen>
+                </iframe>`;
         },
         onClickSaveData() {
             this.form.classList.add("was-validated");

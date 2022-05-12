@@ -426,7 +426,7 @@ module.exports = {
         });
     },
     getAllName: callBack => {
-        const queryString = `Select g.id id, d.id developerid, d.developerName, g.gameName, c.id categoryid, c.categoryName, p.id platformid, p.platformName from games g
+        const queryString = `Select g.id id, d.id developerId, d.developerName, g.gameName, c.id categoryId, c.categoryName, p.id platformId, p.platformName from games g
                                 Inner join platforms p on g.platformId = p.id
                                 Inner join categories c on g.categoryId = c.id
                                 Inner join developers d on g.developerId = d.id
