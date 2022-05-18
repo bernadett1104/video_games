@@ -2,7 +2,7 @@
   <div class="my-border">
       <h1>Kategóriák</h1>
 
-        <table class="table">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">Kategória neve</th>
