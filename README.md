@@ -19,3 +19,5 @@ Ha minden alkalmazás telepítve van elkezdődhet a program beindítása ezeknek
   7. Backend szerver elindítása - npm run dev - parancsal
   8. Majd frontend elinítása - npm run serve - parancsal
   9. Végül kattintson a frontend ablakában az első url-re és meg is tekintheti a programot
+
+# Program működése
