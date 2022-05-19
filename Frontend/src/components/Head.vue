@@ -12,6 +12,6 @@ export default {
 <style>
 .head {
   padding-bottom: 165px;
-  background: url(header_asd.png);
+  background: url(header.png);
 }
 </style>

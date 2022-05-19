@@ -6,14 +6,14 @@
 
         <form>
             <div class="row mb-3 center">
-                <label for="email" class="col-sm-1 col-form-label">E-mail:</label>
+                <label for="email" class="col-sm-1 col-form-label input-group-text">E-mail:</label>
                 <div class="col-sm-3">
                     <input type="email" class="form-control " id="email" placeholder="példa-email@gmail.com" v-model="loginData.email">
                 </div>
             </div>
   
             <div class="row mb-3 center">
-                <label for="password" class="col-sm-1 col-form-label">Jelszó:</label>
+                <label for="password" class="col-sm-1 col-form-label input-group-text">Jelszó:</label>
                 <div class="col-sm-3">
                     <input type="password" class="form-control" id="password" placeholder="példajelszó123" v-model="loginData.password" >
                 </div>
