@@ -21,3 +21,19 @@ Ha minden alkalmazás telepítve van elkezdődhet a program beindítása ezeknek
   9. Végül kattintson a frontend ablakában az első url-re és meg is tekintheti a programot
 
 # Program működése
+A weboldal egy videójáték tárat testesít meg melyben többféle adat is rendelkezésre áll egy adott játékról.
+Mint például: 
+  1. Kategória
+  2. Platform
+  3. Fejlesztő
+  4. Linkek
+  5. Játékok
+
+A weboldalon hitelesítési rendszer müködik. Annyit jelent, hogy bejelentkezni és/ vagy regisztrálni kell
+az oldalak megtekintéséhez.
+
+Fejlesztői bejelentkezéssel engedélyt kapunk adatok létrehozására, szerkesztésére és törlésére mindegyik
+tábla esetében. 
+
+Felhasználói bejelentkezéssel a fejlesztők játékai jellenek meg. ABC sorrendben a fejlesztők nevéhez nézve.
+Szűrni lehet kategória alapján és linkelt videók tekinthetőek meg az adott játékokról.
