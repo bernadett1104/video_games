@@ -126,3 +126,12 @@ Delete from gamelinks Where id = ?;
 Select gl.id id, gl.gameId gameId, g.gameName, gl.link from gamelinks gl
   Inner join games g on gl.gameId = g.id
   Order by g.gameName;
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+Select * from games;
+
+Select gl.id id, gl.gameId gameId, g.gameName, d.developerName , gl.link from gamelinks gl
+  Inner join games g on gl.gameId = g.id
+  Inner join developers d on g.developerId = d.id
+  Order by g.gameName;

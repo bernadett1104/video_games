@@ -145,7 +145,7 @@ Insert into videogames.games
     (18,4, 'Far Cry 6', 3,4),
     (19,4, 'Far Cry New Dawn', 3,4),
     (20,4, 'Watch Dogs: Legion', 2,2),
-    (21,5, 'CoCounter-Strike Global Offensive', 1,1),
+    (21,5, 'Counter-Strike Global Offensive', 1,1),
     (22,5, 'Left 4 Dead 2', 1,2),
     (23,5, 'Dota 2', 1,1),
     (24,5, 'Team Fortress 2', 1,1),

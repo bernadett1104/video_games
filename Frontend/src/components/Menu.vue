@@ -70,7 +70,7 @@
                                     Platformok
                                 </router-link>
                             </li>
-                            <br />
+                            <li><hr class="dropdown-divider"></li>
                             <li>
                                 <router-link
                                     class="dropdown-item"
