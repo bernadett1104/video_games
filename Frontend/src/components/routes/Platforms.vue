@@ -1,12 +1,13 @@
 <template>
   <div class="my-border">
       <h1>Platformok</h1>
-
-        <table class="table table-hover">
-            <thead>
+        <div class="row">
+            <div class="col-12">
+            <table class="table table-hover">
+                <thead>
                 <tr>
-                    <th scope="col">Platform neve</th>
-                    <th scope="col">
+                    <th class="col-11">Platform neve</th>
+                    <th class="col-1">
                         <!-- new -->
                         <button
                             type="button"
@@ -16,8 +17,8 @@
                         </button>
                     </th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr v-for="(platform, index) in platforms" :key="index">
                     <td>{{ platform.platformName }}</td>
                     <td>
@@ -38,9 +39,10 @@
                         </button>
                     </td>
                 </tr>
-            </tbody>
-        </table>
-
+                </tbody>
+            </table>
+            </div>
+        </div>
         <!-- Modal -->
         <div
             class="modal fade"

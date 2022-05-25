@@ -7,8 +7,8 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Fejlesztő neve</th>
-                    <th scope="col">
+                    <th class="col-11">Fejlesztő neve</th>
+                    <th class="col-1">
                         <!-- new -->
                         <button
                             type="button"
