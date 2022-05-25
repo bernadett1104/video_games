@@ -453,4 +453,18 @@ module.exports = {
             return callBack(null, results);
         });
     },
+    getLinksToCard: callBack => {
+        const queryString = `Select gl.id id, gl.gameId gameId, g.gameName, d.id developerId, d.developerName , gl.link from gamelinks gl
+        Inner join games g on gl.gameId = g.id
+        Inner join developers d on g.developerId = d.id
+        Order by g.gameName`;
+        const params = [];
+        pool.query(queryString, params, (error, results, fields) => {
+            if (error) {
+                return callBack(error);
+
+            }
+            return callBack(null, results);
+        });
+    },
 };

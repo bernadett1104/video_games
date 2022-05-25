@@ -236,6 +236,9 @@ get http://localhost:3000/api/gamesallname
 ### Összes link
 get http://localhost:3000/api/alllinks
 
+### Link cardhoz
+get http://localhost:3000/api/getlink
+
 
 # GameLinks
 

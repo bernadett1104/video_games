@@ -35,6 +35,7 @@ const {
     deleteGamelink,
     getAllName,
     getAllLinks,
+    getLinksToCard,
     login
 
 } = require("./user.controller.js");
@@ -85,5 +86,7 @@ router.get("/gamelinks/:id", checkToken, getGamelinksById);
 router.put("/gamelinks/", checkToken, updateGamelink);
 router.delete("/gamelinks/", checkToken, deleteGamelink);
 router.get("/alllinks", checkToken, getAllLinks);
+
+router.get("/getlink", checkToken, getLinksToCard);
 
 module.exports = router;

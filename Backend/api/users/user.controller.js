@@ -35,6 +35,7 @@ const {
     deleteGamelink,
     getAllName,
     getAllLinks,
+    getLinksToCard,
     getUsers
 
 } = require("./user.service.js");
@@ -912,6 +913,29 @@ module.exports = {
     },
     getAllLinks: (req, res) => {
         getAllLinks((err, results) => {
+            if (err) {
+                return res.status(500).json({
+                    success: -1,
+                    message: "Server error",
+                    data: []
+                });
+            }
+            if (results.length == 0) {
+                return res.status(200).json({
+                    success: 0,
+                    message: "No records",
+                    data: results
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                message: "Get successfully",
+                data: results
+            });
+        });
+    },
+    getLinksToCard: (req, res) => {
+        getLinksToCard((err, results) => {
             if (err) {
                 return res.status(500).json({
                     success: -1,

@@ -1,18 +1,16 @@
 <template>
   <div class="my-border">
-		<h1>Főoldal</h1>
-
-    <div class="row row-cols-1 row-cols-md-4 row-cols-sm-3 g-4 p-4">
-        <div class="col" v-for="(gamelink, index) in gamelinks" :key="index">
+    <div  class="row row-cols-1 row-cols-md-4 row-cols-sm-2 g-4 p-4" >
+        <div class="col" v-bind="getVideoFromLink(gamelink.link)"  v-for="(gamelink, index) in gamelinks" :key="index">
           <div class="card h-100">
             <div class="card-body">
+              <h4 class="card-title">{{ gamelink.developerName}}</h4>
               <h5 class="card-title">{{ gamelink.gameName }}</h5>
-              <p class="card-text"><a :href="gamelink.link" target="_blank">
+              <p v-html="embed" class="card-text"><a :href="gamelink.link">
                             {{ gamelink.link }} </a></p>
             </div>
           </div>
         </div>
-        
     </div>
   </div>
 </template>
@@ -23,10 +21,12 @@ class GameLink {
           id = null,
           gameId = null,
           link = null,
+          developerId = null,
       ) {
           this.id = id;
           this.gameId = gameId;
           this.link = link;
+          this.developerId = developerId;
       }
   }
 
@@ -40,11 +40,12 @@ export default {
             state: "view",
             stateTitle: null,
             gameId: null, 
+            developerId: null,
             embed: null,
         };
     },
     created() {
-        this.getGamelinks();
+        this.getLinksToCard();
         this.getGamesABC();
     },
     methods: {
@@ -67,12 +68,12 @@ export default {
                     this.gamesABC = [];
                 });
         },
-        getGamelinks() {
+        getLinksToCard() {
             let headers = new Headers();
 
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/alllinks`;
+            const url = `${this.$loginServer}/api/getlink`;
             fetch(url, {
                 method: "GET",
                 headers: headers,
@@ -86,27 +87,7 @@ export default {
                     this.gamelinks = [];
                 });
         },
-        getGamelinksById(id) {
-            let headers = new Headers();
-
-            headers.append("Content-Type", "application/json");
-            headers.append("Authorization", "Bearer " + this.$root.$data.token);
-            const url = `${this.$loginServer}/api/gamelinks/${id}`;
-            fetch(url, {
-                method: "GET",
-                headers: headers,
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    this.gamelink = data.data[0];
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                    this.gamelink = new GameLink();
-                });
-        },
-        onClickGameName(link){
-            //src="https://www.youtube.com/embed/-pUhraVG7Ow" 
+        getVideoFromLink(link){
             link = link.split("=")[1];
             this.embed = `<iframe width="100%" height="315"
                 src="https://www.youtube.com/embed/${link}"
@@ -119,20 +100,6 @@ export default {
                 gyroscope; 
                 picture-in-picture" allowfullscreen>
                 </iframe>`;
-        },
-        onClickSaveData() {
-            this.form.classList.add("was-validated");
-            if (this.form.checkValidity()) {
-                if (this.state == "edit") {
-                    this.updateGamelink();
-                } else if (this.state == "new") {
-                    this.createGamelink();
-                }
-                this.modal.hide();
-                this.state = "view";
-            } else {
-                return;
-            }
         },
     }
 }
