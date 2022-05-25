@@ -2,6 +2,8 @@
   <div class="my-border">
       <h1>Fejlesztők</h1>
 
+        <div class="row">
+        <div class="col-12">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -40,7 +42,8 @@
                 </tr>
             </tbody>
         </table>
-
+        </div>
+        </div>
         <!-- Modal -->
         <div
             class="modal fade"

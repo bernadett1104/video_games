@@ -47,7 +47,7 @@
                 </tbody>
             </table>
             </div>
-            <div class="col-12 col-md-5 pe-5 order-1 order-md-2">
+            <div class="col-12 col-md-5 pe-7 order-1 order-md-2">
                 <div v-html="embed" class="sticky-top">
 
                 </div>

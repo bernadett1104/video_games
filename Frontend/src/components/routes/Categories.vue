@@ -1,24 +1,25 @@
 <template>
   <div class="my-border">
       <h1>Kategóriák</h1>
-
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Kategória neve</th>
-                    <th scope="col">
-                        <!-- new -->
-                        <button
-                            type="button"
-                            class="btn btn-success ms-1 btn-sm"
-                            @click="onClickNew()">
-                            <i class="bi bi-plus-lg"></i>
-                        </button>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(category, index) in categories" :key="index">
+        <div class="row">
+            <div class="col-12">
+            <table class="table table-hover ">
+                <thead>
+                    <tr>
+                        <th scope="col">Kategória neve</th>
+                        <th scope="col">
+                            <!-- new -->
+                            <button
+                                type="button"
+                                class="btn btn-success ms-1 btn-sm"
+                                @click="onClickNew()">
+                                <i class="bi bi-plus-lg"></i>
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(category, index) in categories" :key="index">
                     <td>{{ category.categoryName }}</td>
                     <td>
                         <!-- edit -->
@@ -38,9 +39,10 @@
                         </button>
                     </td>
                 </tr>
-            </tbody>
-        </table>
-
+                </tbody>
+            </table>
+            </div>
+        </div>
         <!-- Modal -->
         <div
             class="modal fade"

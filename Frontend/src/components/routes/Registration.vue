@@ -4,7 +4,7 @@
         <p>Kérjük adja meg az adatait a regisztrációhoz!</p>
 
         <form class="needs-validation" novalidate>
-            <div class="row mb-3 col-sm-3 center ">
+            <div class="row mb-3 col-sm-3 center">
                 <label for="last_name" class="col-sm-1 col-form-label input-group-text">Vezetéknév:</label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control " id="last_name" placeholder="Sándor" v-model="registrationData.lastname" required> 

@@ -76,14 +76,14 @@ router.get("/games/:id", checkToken, getGamesById);
 router.put("/games/", checkToken, updateGame);
 router.delete("/games/", checkToken, deleteGame);
 router.get("/gamesABC/", checkToken, getGamesABC);
-
 router.get("/gamesallname", checkToken, getAllName);
-router.get("/alllinks", checkToken, getAllLinks);
+
 
 router.post("/gamelinks", checkToken, createGamelink);
 router.get("/gamelinks", checkToken, getGamelinks);
 router.get("/gamelinks/:id", checkToken, getGamelinksById);
 router.put("/gamelinks/", checkToken, updateGamelink);
 router.delete("/gamelinks/", checkToken, deleteGamelink);
+router.get("/alllinks", checkToken, getAllLinks);
 
 module.exports = router;
