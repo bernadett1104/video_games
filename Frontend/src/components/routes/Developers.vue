@@ -46,39 +46,27 @@
         </div>
         <!-- Modal -->
         <div
-            class="modal fade"
-            id="modal"
-            tabindex="-1"
+            class="modal fade" id="modal" tabindex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">
-                            {{ stateTitle }}
-                        </h5>
-
+                            {{ stateTitle }} </h5>
                         <button
-                            type="button"
-                            class="btn-close"
-                            aria-label="Close"
+                            type="button" class="btn-close" aria-label="Close"
                             @click="onClickCancel()"></button>
-                    </div>
-                    
+                    </div>   
                     <div class="modal-body">
                         <form class="row g-3 needs-validation" novalidate>
-                            
                             <div class="mb-3 col-12">
                                 <label for="name" class="form-label"
-                                    >Fejlesztő neve:</label
-                                >
+                                    >Fejlesztő neve:</label>
                                 <input
-                                    type="text"
-                                    class="form-control"
-                                    id="name"
+                                    type="text" class="form-control" id="name"
                                     placeholder="Név"
-                                    v-model="developer.developerName"
-                                    required />
+                                    v-model="developer.developerName" required />
                                 <div class="invalid-feedback">
                                     A fejlesztő neve kötelező!
                                 </div>
@@ -183,7 +171,6 @@ export default {
         },
         updateDeveloper() {
             let headers = new Headers();
-
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
             const url = `${this.$loginServer}/api/developers/`;

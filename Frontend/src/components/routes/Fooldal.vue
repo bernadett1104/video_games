@@ -1,7 +1,8 @@
 <template>
   <div class="my-border">
     <div  class="row row-cols-1 row-cols-md-4 row-cols-sm-2 g-4 p-4" >
-        <div class="col" v-bind="getVideoFromLink(gamelink.link)"  v-for="(gamelink, index) in gamelinks" :key="index">
+        <div class="col" v-bind="getVideoFromLink(gamelink.link)"  
+        v-for="(gamelink, index) in gamelinks" :key="index">
           <div class="card h-100">
             <div class="card-body">
               <h4 class="card-title">{{ gamelink.developerName}}</h4>
@@ -70,7 +71,6 @@ export default {
         },
         getLinksToCard() {
             let headers = new Headers();
-
             headers.append("Content-Type", "application/json");
             headers.append("Authorization", "Bearer " + this.$root.$data.token);
             const url = `${this.$loginServer}/api/getlink`;
