@@ -60,7 +60,6 @@
                         <h5 class="modal-title" id="exampleModalLabel">
                             {{ stateTitle }}
                         </h5>
-
                         <button
                             type="button"
                             class="btn-close"
